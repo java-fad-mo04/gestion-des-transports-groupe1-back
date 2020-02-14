@@ -8,11 +8,14 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import dev.domain.Categorie;
 import dev.domain.Collegue;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
+import dev.domain.Vehicule;
 import dev.domain.Version;
 import dev.repository.CollegueRepo;
+import dev.repository.VehiculeRepo;
 import dev.repository.VersionRepo;
 
 /**
@@ -25,13 +28,15 @@ public class StartupListener {
 	private VersionRepo versionRepo;
 	private PasswordEncoder passwordEncoder;
 	private CollegueRepo collegueRepo;
+	private VehiculeRepo vehiculeRepo;
 
 	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo,
-			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo) {
+			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeRepo vehiculeRepo) {
 		this.appVersion = appVersion;
 		this.versionRepo = versionRepo;
 		this.passwordEncoder = passwordEncoder;
 		this.collegueRepo = collegueRepo;
+		this.vehiculeRepo = vehiculeRepo;
 	}
 
 	@EventListener(ContextRefreshedEvent.class)
@@ -65,6 +70,16 @@ public class StartupListener {
 		col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_UTILISATEUR),
 				new RoleCollegue(col3, Role.ROLE_CHAUFFEUR)));
 		this.collegueRepo.save(col3);
+
+		Vehicule ve = new Vehicule();
+		ve.setMarque("Peugeot");
+		ve.setCategorie(Categorie.SUV);
+		this.vehiculeRepo.save(ve);
+
+		Vehicule ve2 = new Vehicule();
+		ve2.setMarque("Peugeot");
+		ve2.setCategorie(Categorie.MICRO_URBAINE);
+		this.vehiculeRepo.save(ve2);
 
 	}
 
