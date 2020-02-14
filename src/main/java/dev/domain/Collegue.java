@@ -21,6 +21,13 @@ public class Collegue {
     @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
     private List<RoleCollegue> roles;
 
+    private Long telephone;
+    
+    private String permis;
+    
+    private String urlPhoto;
+ 
+    
     public Long getId() {
         return id;
     }
@@ -68,4 +75,28 @@ public class Collegue {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+	public Long getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(Long telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getPermis() {
+		return permis;
+	}
+
+	public void setPermis(String permis) {
+		this.permis = permis;
+	}
+
+	public String getUrlPhoto() {
+		return urlPhoto;
+	}
+
+	public void setUrlPhoto(String urlPhoto) {
+		this.urlPhoto = urlPhoto;
+	}
 }
