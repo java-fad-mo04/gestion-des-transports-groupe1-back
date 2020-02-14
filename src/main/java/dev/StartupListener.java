@@ -64,6 +64,7 @@ public class StartupListener {
 		col3.setMotDePasse(passwordEncoder.encode("superpass"));
 		col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_UTILISATEUR),
 				new RoleCollegue(col3, Role.ROLE_CHAUFFEUR)));
+		this.collegueRepo.save(col3);
 
 	}
 
