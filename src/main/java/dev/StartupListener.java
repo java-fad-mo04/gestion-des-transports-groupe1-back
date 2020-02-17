@@ -1,5 +1,6 @@
 package dev;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import dev.domain.Categorie;
 import dev.domain.Collegue;
+import dev.domain.ReservationsCovoiturage;
+import dev.domain.ReservationsSociete;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
 import dev.domain.Statut;
@@ -17,6 +20,8 @@ import dev.domain.VehiculePerso;
 import dev.domain.VehiculeSociete;
 import dev.domain.Version;
 import dev.repository.CollegueRepo;
+import dev.repository.ReservationsCovoiturageRepo;
+import dev.repository.ReservationsSocieteRepo;
 import dev.repository.VehiculePersoRepo;
 import dev.repository.VehiculeSocieteRepo;
 import dev.repository.VersionRepo;
@@ -33,16 +38,20 @@ public class StartupListener {
 	private CollegueRepo collegueRepo;
 	private VehiculeSocieteRepo vehiculeSocieteRepo;
 	private VehiculePersoRepo vehiculePersoRepo;
-
+	private ReservationsSocieteRepo resaSocieteRepo;
+	private ReservationsCovoiturageRepo resaCovoiturageRepo;
+	
 	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo,
 			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeSocieteRepo vehiculeSocieteRepo,
-			VehiculePersoRepo vehiculePersoRepo) {
+			VehiculePersoRepo vehiculePersoRepo, ReservationsSocieteRepo resaSocieteRepo, ReservationsCovoiturageRepo resaCovoiturageRepo) {
 		this.appVersion = appVersion;
 		this.versionRepo = versionRepo;
 		this.passwordEncoder = passwordEncoder;
 		this.collegueRepo = collegueRepo;
 		this.vehiculeSocieteRepo = vehiculeSocieteRepo;
 		this.vehiculePersoRepo = vehiculePersoRepo;
+		this.resaSocieteRepo = resaSocieteRepo;
+		this.resaCovoiturageRepo = resaCovoiturageRepo;
 	}
 
 	@EventListener(ContextRefreshedEvent.class)
@@ -92,7 +101,25 @@ public class StartupListener {
 		veP1.setModele("Scenic");
 		veP1.setNombrePlace(4);
 		this.vehiculePersoRepo.save(veP1);
-
+		
+		ReservationsSociete rs1 = new ReservationsSociete();
+		rs1.setDepart("Montpellier");
+		rs1.setDestination("Lyon");
+		rs1.setDate(LocalDateTime.of(2020, 02, 25, 10, 00));
+		rs1.setCollegue(col2);
+		rs1.setChauffeur(col3);
+		rs1.setVehicules(ve);
+		this.resaSocieteRepo.save(rs1);
+		
+		ReservationsCovoiturage rc1 = new ReservationsCovoiturage();
+		rc1.setDepart("Lyon");
+		rc1.setDestination("Marseille");
+		rc1.setDate(LocalDateTime.of(2020, 03, 5, 8, 30));
+		rc1.setCollegue(col1);
+		rc1.setListePassagers(Arrays.asList(col1,col3));
+		rc1.setVehicules(veP1);
+		this.resaCovoiturageRepo.save(rc1);
+	
 	}
 
 }
