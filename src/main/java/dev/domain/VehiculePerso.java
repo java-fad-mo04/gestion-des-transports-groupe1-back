@@ -1,19 +1,18 @@
 package dev.domain;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 @Entity(name = "vehicule_perso")
 public class VehiculePerso extends Vehicule {
 
 	private int nombrePlace;
 
-	@OneToMany(mappedBy="vehicules")
-	private Set<ReservationsCovoiturage> reservationsCovoit = new HashSet <ReservationsCovoiturage>();
-	
+	// @OneToMany(mappedBy="vehicules")
+	// private Set<ReservationsCovoiturage> reservationsCovoit = new HashSet
+	// <ReservationsCovoiturage>();
+
 	/**
 	 * 
 	 */
@@ -40,12 +39,12 @@ public class VehiculePerso extends Vehicule {
 		this.nombrePlace = nombrePlace;
 	}
 
-	public Set<ReservationsCovoiturage> getReservationsCovoit() {
-		return reservationsCovoit;
-	}
-
-	public void setReservationsCovoit(Set<ReservationsCovoiturage> reservationsCovoit) {
-		this.reservationsCovoit = reservationsCovoit;
-	}
+//	public Set<ReservationsCovoiturage> getReservationsCovoit() {
+//		return reservationsCovoit;
+//	}
+//
+//	public void setReservationsCovoit(Set<ReservationsCovoiturage> reservationsCovoit) {
+//		this.reservationsCovoit = reservationsCovoit;
+//	}
 
 }
