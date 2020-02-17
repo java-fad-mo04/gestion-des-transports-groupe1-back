@@ -1,5 +1,6 @@
 package dev.domain;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class ReservationsCovoiturage extends Reservations {
 
+	private String depart;
+	private String destination;
 	
 	@ManyToMany
 	@JoinTable(name = "reservations_covoiturage_passager", joinColumns = @JoinColumn(name = "reservations_covoit_id", referencedColumnName = "id"), 
@@ -24,6 +27,22 @@ public class ReservationsCovoiturage extends Reservations {
 	
 	public ReservationsCovoiturage() {
 		super();
+	}
+
+	public String getDepart() {
+		return depart;
+	}
+
+	public void setDepart(String depart) {
+		this.depart = depart;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
 
 	public List<Collegue> getListePassagers() {

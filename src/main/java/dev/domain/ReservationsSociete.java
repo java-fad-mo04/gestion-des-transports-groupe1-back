@@ -1,5 +1,7 @@
 package dev.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -7,6 +9,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class ReservationsSociete extends Reservations {
 
+	private LocalDateTime dateRetour;
+	
 	@ManyToOne
     @JoinColumn(name = "id_chauffeur")
     private Collegue chauffeur;
@@ -17,6 +21,14 @@ public class ReservationsSociete extends Reservations {
 
 	public ReservationsSociete() {
 		super();
+	}
+
+	public LocalDateTime getDateRetour() {
+		return dateRetour;
+	}
+
+	public void setDateRetour(LocalDateTime dateRetour) {
+		this.dateRetour = dateRetour;
 	}
 
 	public Collegue getChauffeur() {

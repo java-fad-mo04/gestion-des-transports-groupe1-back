@@ -102,14 +102,20 @@ public class StartupListener {
 		veP1.setNombrePlace(4);
 		this.vehiculePersoRepo.save(veP1);
 		
-		ReservationsSociete rs1 = new ReservationsSociete();
-		rs1.setDepart("Montpellier");
-		rs1.setDestination("Lyon");
-		rs1.setDate(LocalDateTime.of(2020, 02, 25, 10, 00));
-		rs1.setCollegue(col2);
-		rs1.setChauffeur(col3);
-		rs1.setVehicules(ve);
-		this.resaSocieteRepo.save(rs1);
+		ReservationsSociete rs1_chauff = new ReservationsSociete();
+		rs1_chauff.setDate(LocalDateTime.of(2020, 02, 25, 10, 00));
+		rs1_chauff.setDateRetour(LocalDateTime.of(2020, 02, 27, 18, 00));
+		rs1_chauff.setCollegue(col2);
+		rs1_chauff.setChauffeur(col3);
+		rs1_chauff.setVehicules(ve);
+		this.resaSocieteRepo.save(rs1_chauff);
+		
+		ReservationsSociete rs2 = new ReservationsSociete();
+		rs2.setDate(LocalDateTime.of(2020, 03, 8, 10, 00));
+		rs2.setDateRetour(LocalDateTime.of(2020, 03, 9, 17, 00));
+		rs2.setCollegue(col1);
+		rs2.setVehicules(ve);
+		this.resaSocieteRepo.save(rs2);
 		
 		ReservationsCovoiturage rc1 = new ReservationsCovoiturage();
 		rc1.setDepart("Lyon");
