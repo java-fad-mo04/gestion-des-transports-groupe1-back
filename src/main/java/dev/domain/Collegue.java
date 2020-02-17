@@ -1,7 +1,10 @@
 package dev.domain;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Collegue {
@@ -27,6 +30,9 @@ public class Collegue {
     
     private String urlPhoto;
  
+    @OneToMany(mappedBy="reservations")
+	private Set<Reservations> reservations = new HashSet <Reservations>();
+	
     
     public Long getId() {
         return id;
