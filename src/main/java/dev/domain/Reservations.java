@@ -22,10 +22,6 @@ public class Reservations {
 	@Column(name="ID")
 	private Integer id;
 	
-	private String depart;
-	
-	private String destination;
-	
 	private LocalDateTime date;
 	
 	@ManyToOne
@@ -45,21 +41,6 @@ public class Reservations {
 		this.id = id;
 	}
 
-	public String getDepart() {
-		return depart;
-	}
-
-	public void setDepart(String depart) {
-		this.depart = depart;
-	}
-
-	public String getDestination() {
-		return destination;
-	}
-
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
 
 	public LocalDateTime getDate() {
 		return date;
@@ -69,7 +50,6 @@ public class Reservations {
 		this.date = date;
 	}
 
-	
 	public Collegue getCollegue() {
 		return collegue;
 	}
