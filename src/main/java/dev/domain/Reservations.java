@@ -28,10 +28,54 @@ public class Reservations {
 	
 	private LocalDateTime date;
 	
-	private Collegue collegue;
-	
 	@ManyToOne
 	@JoinColumn(name="ID_COLLEGUE")
-	private Collegue reservations;
+	private Collegue collegue;
+	
+	
+	public Reservations() {
+		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getDepart() {
+		return depart;
+	}
+
+	public void setDepart(String depart) {
+		this.depart = depart;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	
+	public Collegue getCollegue() {
+		return collegue;
+	}
+
+	public void setCollegue(Collegue collegue) {
+		this.collegue = collegue;
+	}
 	
 }
