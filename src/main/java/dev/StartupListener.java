@@ -8,11 +8,17 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import dev.domain.Categorie;
 import dev.domain.Collegue;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
+import dev.domain.Statut;
+import dev.domain.VehiculePerso;
+import dev.domain.VehiculeSociete;
 import dev.domain.Version;
 import dev.repository.CollegueRepo;
+import dev.repository.VehiculePersoRepo;
+import dev.repository.VehiculeSocieteRepo;
 import dev.repository.VersionRepo;
 
 /**
@@ -25,13 +31,18 @@ public class StartupListener {
 	private VersionRepo versionRepo;
 	private PasswordEncoder passwordEncoder;
 	private CollegueRepo collegueRepo;
+	private VehiculeSocieteRepo vehiculeSocieteRepo;
+	private VehiculePersoRepo vehiculePersoRepo;
 
 	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo,
-			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo) {
+			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeSocieteRepo vehiculeSocieteRepo,
+			VehiculePersoRepo vehiculePersoRepo) {
 		this.appVersion = appVersion;
 		this.versionRepo = versionRepo;
 		this.passwordEncoder = passwordEncoder;
 		this.collegueRepo = collegueRepo;
+		this.vehiculeSocieteRepo = vehiculeSocieteRepo;
+		this.vehiculePersoRepo = vehiculePersoRepo;
 	}
 
 	@EventListener(ContextRefreshedEvent.class)
@@ -65,6 +76,22 @@ public class StartupListener {
 		col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_UTILISATEUR),
 				new RoleCollegue(col3, Role.ROLE_CHAUFFEUR)));
 		this.collegueRepo.save(col3);
+
+		VehiculeSociete ve = new VehiculeSociete();
+		ve.setMarque("Peugeot");
+		ve.setCategorie(Categorie.BERLINE_TAILLE_L);
+		ve.setImmatriculation("AA-123-BB");
+		ve.setModele("308");
+		ve.setStatut(Statut.EN_SERVICE);
+		ve.setUrlPhoto("https://i.ytimg.com/vi/fqNzmIkRFHk/maxresdefault.jpg");
+		this.vehiculeSocieteRepo.save(ve);
+
+		VehiculePerso veP1 = new VehiculePerso();
+		veP1.setImmatriculation("CC-123-CC");
+		veP1.setMarque("Renault");
+		veP1.setModele("Scenic");
+		veP1.setNombrePlace(4);
+		this.vehiculePersoRepo.save(veP1);
 
 	}
 
