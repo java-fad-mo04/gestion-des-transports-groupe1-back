@@ -1,20 +1,18 @@
 package dev.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
-@Entity
+@MappedSuperclass
 public class Vehicule {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	private String marque;
-	@Enumerated(EnumType.STRING)
-	private Categorie categorie;
+	private String modele;
+	private String immatriculation;
 
 	/**
 	 * 
@@ -28,7 +26,7 @@ public class Vehicule {
 	 * 
 	 * @return the id
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -38,7 +36,7 @@ public class Vehicule {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -64,20 +62,39 @@ public class Vehicule {
 	/**
 	 * Getter
 	 * 
-	 * @return the categorie
+	 * @return the modele
 	 */
-	public Categorie getCategorie() {
-		return categorie;
+	public String getModele() {
+		return modele;
 	}
 
 	/**
 	 * Setter
 	 * 
-	 * @param categorie
-	 *            the categorie to set
+	 * @param modele
+	 *            the modele to set
 	 */
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
+	public void setModele(String modele) {
+		this.modele = modele;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return the immatriculation
+	 */
+	public String getImmatriculation() {
+		return immatriculation;
+	}
+
+	/**
+	 * Setter
+	 * 
+	 * @param immatriculation
+	 *            the immatriculation to set
+	 */
+	public void setImmatriculation(String immatriculation) {
+		this.immatriculation = immatriculation;
 	}
 
 }
