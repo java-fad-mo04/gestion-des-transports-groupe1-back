@@ -130,5 +130,4 @@ public class Collegue {
 		this.reservationsCovoit = reservationsCovoit;
 	}
 
-
 }
