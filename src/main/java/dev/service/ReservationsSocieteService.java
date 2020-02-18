@@ -1,13 +1,11 @@
 package dev.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import dev.controller.vm.ReservationsSocieteVM;
-import dev.domain.ReservationsSociete;
 import dev.repository.ReservationsSocieteRepo;
 
 @Service

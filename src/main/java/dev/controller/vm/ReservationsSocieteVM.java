@@ -2,7 +2,6 @@ package dev.controller.vm;
 
 import java.time.LocalDateTime;
 
-import dev.domain.Collegue;
 import dev.domain.ReservationsSociete;
 import dev.domain.VehiculeSociete;
 
@@ -59,6 +58,4 @@ public class ReservationsSocieteVM {
 	public void setVehicules(VehiculeSociete vehicules) {
 		this.vehicules = vehicules;
 	}
-	
-	
 }
