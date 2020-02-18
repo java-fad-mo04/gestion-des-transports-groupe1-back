@@ -1,10 +1,15 @@
 package dev.domain;
 
-import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Collegue {
@@ -30,18 +35,16 @@ public class Collegue {
 
 	private String urlPhoto;
 
-	
 	@OneToMany(mappedBy = "collegue")
 	private Set<ReservationsSociete> reservations = new HashSet<ReservationsSociete>();
 
 	@OneToMany(mappedBy = "collegue")
 	private Set<ReservationsCovoiturage> reservationsCovoit = new HashSet<ReservationsCovoiturage>();
-	
-	
+
 	public Collegue() {
 		super();
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -114,20 +117,21 @@ public class Collegue {
 		this.urlPhoto = urlPhoto;
 	}
 
-	public Set<ReservationsSociete> getReservations() {
-		return reservations;
-	}
+	// public Set<ReservationsSociete> getReservations() {
+	// return reservations;
+	// }
+	//
+	// public void setReservations(Set<ReservationsSociete> reservations) {
+	// this.reservations = reservations;
+	// }
 
-	public void setReservations(Set<ReservationsSociete> reservations) {
-		this.reservations = reservations;
-	}
-
-	public Set<ReservationsCovoiturage> getReservationsCovoit() {
-		return reservationsCovoit;
-	}
-
-	public void setReservationsCovoit(Set<ReservationsCovoiturage> reservationsCovoit) {
-		this.reservationsCovoit = reservationsCovoit;
-	}
+	// public Set<ReservationsCovoiturage> getReservationsCovoit() {
+	// return reservationsCovoit;
+	// }
+	//
+	// public void setReservationsCovoit(Set<ReservationsCovoiturage>
+	// reservationsCovoit) {
+	// this.reservationsCovoit = reservationsCovoit;
+	// }
 
 }
