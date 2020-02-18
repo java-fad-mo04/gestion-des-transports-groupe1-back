@@ -1,11 +1,11 @@
-package dev.controller.vm;
+package dev.controller.dto;
 
 import java.time.LocalDateTime;
 
-import dev.domain.ReservationsSociete;
+import dev.controller.vm.CollegueVM;
 import dev.domain.VehiculeSociete;
 
-public class ReservationsSocieteVM {
+public class ReservationsSocieteDTO {
 
 	private LocalDateTime date;
 	private LocalDateTime dateRetour;
@@ -14,30 +14,33 @@ public class ReservationsSocieteVM {
 	private VehiculeSociete vehicule;
 	private Boolean avecChauffeur;
 	
-	public ReservationsSocieteVM(ReservationsSociete resaSociete) {
-        this.date = resaSociete.getDate();
-        this.dateRetour = resaSociete.getDateRetour();
-        this.collegue = new CollegueVM(resaSociete.getCollegue());
-        if(resaSociete.getChauffeur() != null) {
-        	this.chauffeur = new CollegueVM(resaSociete.getChauffeur());
-        }
-        this.vehicule = resaSociete.getVehicules(); 
-        this.avecChauffeur = resaSociete.getAvecChauffeur();
+	public ReservationsSocieteDTO(LocalDateTime date, LocalDateTime dateRetour, CollegueVM collegue,
+			CollegueVM chauffeur, VehiculeSociete vehicule, Boolean avecChauffeur) {
+		super();
+		this.date = date;
+		this.dateRetour = dateRetour;
+		this.collegue = collegue;
+		this.chauffeur = chauffeur;
+		this.vehicule = vehicule;
+		this.avecChauffeur = avecChauffeur;
 	}
-	
+
 	public LocalDateTime getDate() {
 		return date;
 	}
+
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
+
 	public LocalDateTime getDateRetour() {
 		return dateRetour;
 	}
+
 	public void setDateRetour(LocalDateTime dateRetour) {
 		this.dateRetour = dateRetour;
 	}
-	
+
 	public CollegueVM getCollegue() {
 		return collegue;
 	}
@@ -57,6 +60,7 @@ public class ReservationsSocieteVM {
 	public VehiculeSociete getVehicule() {
 		return vehicule;
 	}
+
 	public void setVehicule(VehiculeSociete vehicule) {
 		this.vehicule = vehicule;
 	}
