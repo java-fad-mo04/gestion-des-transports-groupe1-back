@@ -119,7 +119,7 @@
                 <jdbc.pass></jdbc.pass>
                 <jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
                 <jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>
-                <jdbc.connections.max.active>5</jdbc.connections.max.active>
+                <jdbc.connections.max.active>20</jdbc.connections.max.active>
             </properties>
             <dependencies>
                 <dependency>

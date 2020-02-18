@@ -117,21 +117,20 @@ public class Collegue {
 		this.urlPhoto = urlPhoto;
 	}
 
-	// public Set<ReservationsSociete> getReservations() {
-	// return reservations;
-	// }
-	//
-	// public void setReservations(Set<ReservationsSociete> reservations) {
-	// this.reservations = reservations;
-	// }
+	public Set<ReservationsSociete> getReservations() {
+		return reservations;
+	}
 
-	// public Set<ReservationsCovoiturage> getReservationsCovoit() {
-	// return reservationsCovoit;
-	// }
-	//
-	// public void setReservationsCovoit(Set<ReservationsCovoiturage>
-	// reservationsCovoit) {
-	// this.reservationsCovoit = reservationsCovoit;
-	// }
+	public void setReservations(Set<ReservationsSociete> reservations) {
+		this.reservations = reservations;
+	}
+
+	public Set<ReservationsCovoiturage> getReservationsCovoit() {
+		return reservationsCovoit;
+	}
+
+	public void setReservationsCovoit(Set<ReservationsCovoiturage> reservationsCovoit) {
+		this.reservationsCovoit = reservationsCovoit;
+	}
 
 }

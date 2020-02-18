@@ -1,12 +1,8 @@
 package dev.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
 
 @Entity(name = "vehicule_societe")
 public class VehiculeSociete extends Vehicule {
@@ -17,9 +13,6 @@ public class VehiculeSociete extends Vehicule {
 	private Statut statut;
 	private String urlPhoto;
 
-	@OneToMany(mappedBy = "vehicules")
-	private Set<ReservationsSociete> reservations = new HashSet<ReservationsSociete>();
-	
 	/**
 	 * 
 	 */
@@ -82,14 +75,6 @@ public class VehiculeSociete extends Vehicule {
 	 */
 	public void setUrlPhoto(String urlPhoto) {
 		this.urlPhoto = urlPhoto;
-	}
-
-	public Set<ReservationsSociete> getReservations() {
-		return reservations;
-	}
-
-	public void setReservations(Set<ReservationsSociete> reservations) {
-		this.reservations = reservations;
 	}
 
 }
