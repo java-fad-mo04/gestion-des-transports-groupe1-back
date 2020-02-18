@@ -59,6 +59,4 @@ public class ReservationsSocieteVM {
 	public void setVehicules(VehiculeSociete vehicules) {
 		this.vehicules = vehicules;
 	}
-	
-	
 }
