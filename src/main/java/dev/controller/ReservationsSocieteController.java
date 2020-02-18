@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.controller.vm.CollegueVM;
 import dev.controller.vm.ReservationsSocieteVM;
 import dev.domain.ReservationsSociete;
-import dev.services.ReservationsSocieteService;
+import dev.service.ReservationsSocieteService;
 
 
 @RestController

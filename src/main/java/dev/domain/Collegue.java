@@ -1,10 +1,15 @@
 package dev.domain;
 
-import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Collegue {
@@ -30,19 +35,16 @@ public class Collegue {
 
 	private String urlPhoto;
 
-	
 	@OneToMany(mappedBy = "collegue")
 	private Set<ReservationsSociete> reservations = new HashSet<ReservationsSociete>();
 
 	@OneToMany(mappedBy = "collegue")
 	private Set<ReservationsCovoiturage> reservationsCovoit = new HashSet<ReservationsCovoiturage>();
-	
-	
+
 	public Collegue() {
 		super();
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
