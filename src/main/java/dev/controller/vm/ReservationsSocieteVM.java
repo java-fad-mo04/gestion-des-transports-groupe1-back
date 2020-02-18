@@ -10,15 +10,17 @@ public class ReservationsSocieteVM {
 
 	private LocalDateTime date;
 	private LocalDateTime dateRetour;
-	private Collegue collegue;
-	private Collegue chauffeur;
+	private CollegueVM collegue;
+	private CollegueVM chauffeur;
 	private VehiculeSociete vehicules;
 	
 	public ReservationsSocieteVM(ReservationsSociete resaSociete) {
         this.date = resaSociete.getDate();
         this.dateRetour = resaSociete.getDateRetour();
-        this.collegue = resaSociete.getCollegue();
-        this.chauffeur = resaSociete.getChauffeur();
+        this.collegue = new CollegueVM(resaSociete.getCollegue());
+        if(resaSociete.getChauffeur() != null) {
+        	this.chauffeur = new CollegueVM(resaSociete.getChauffeur());
+        }
         this.vehicules = resaSociete.getVehicules(); 
 	}
 	
@@ -34,18 +36,23 @@ public class ReservationsSocieteVM {
 	public void setDateRetour(LocalDateTime dateRetour) {
 		this.dateRetour = dateRetour;
 	}
-	public Collegue getCollegue() {
+	
+	public CollegueVM getCollegue() {
 		return collegue;
 	}
-	public void setCollegue(Collegue collegue) {
+
+	public void setCollegue(CollegueVM collegue) {
 		this.collegue = collegue;
 	}
-	public Collegue getChauffeur() {
+
+	public CollegueVM getChauffeur() {
 		return chauffeur;
 	}
-	public void setChauffeur(Collegue chauffeur) {
+
+	public void setChauffeur(CollegueVM chauffeur) {
 		this.chauffeur = chauffeur;
 	}
+
 	public VehiculeSociete getVehicules() {
 		return vehicules;
 	}

@@ -2,6 +2,7 @@ package dev.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,9 @@ public class ReservationsSocieteService {
 	}
 
 	public List<ReservationsSocieteVM> listerReservationsSociete() {
-		
-		List<ReservationsSocieteVM> reservationsSocieteVM = new ArrayList<ReservationsSocieteVM>();
-		for (ReservationsSociete resa : this.reservationsSocieteRepo.findAll()) {
-			reservationsSocieteVM.add(new ReservationsSocieteVM(resa));
 
-		}
-		return reservationsSocieteVM;
+		return this.reservationsSocieteRepo.findAll().stream().map(ReservationsSocieteVM::new)
+				.collect(Collectors.toList());
 	}
 	
 }

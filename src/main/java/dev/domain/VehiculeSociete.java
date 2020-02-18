@@ -17,9 +17,6 @@ public class VehiculeSociete extends Vehicule {
 	private Statut statut;
 	private String urlPhoto;
 
-	@OneToMany(mappedBy = "vehicules")
-	private Set<ReservationsSociete> reservations = new HashSet<ReservationsSociete>();
-	
 	/**
 	 * 
 	 */
@@ -82,14 +79,6 @@ public class VehiculeSociete extends Vehicule {
 	 */
 	public void setUrlPhoto(String urlPhoto) {
 		this.urlPhoto = urlPhoto;
-	}
-
-	public Set<ReservationsSociete> getReservations() {
-		return reservations;
-	}
-
-	public void setReservations(Set<ReservationsSociete> reservations) {
-		this.reservations = reservations;
 	}
 
 }

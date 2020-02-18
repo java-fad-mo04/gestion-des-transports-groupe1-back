@@ -16,7 +16,7 @@ import dev.service.ReservationsSocieteService;
 
 
 @RestController
-@RequestMapping(value = "/reservationsSociete")
+@RequestMapping(value = "reservationsSociete")
 public class ReservationsSocieteController {
 
 	private ReservationsSocieteService reservationsSocieteService;
