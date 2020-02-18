@@ -42,6 +42,7 @@ public class Collegue {
 		super();
 	}
 	
+	
 	public Long getId() {
 		return id;
 	}
