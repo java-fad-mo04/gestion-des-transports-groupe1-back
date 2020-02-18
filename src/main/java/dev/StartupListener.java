@@ -87,6 +87,14 @@ public class StartupListener {
 				new RoleCollegue(col3, Role.ROLE_CHAUFFEUR)));
 		this.collegueRepo.save(col3);
 
+		Collegue col4 = new Collegue();
+		col4.setNom("Dupont");
+		col4.setPrenom("Jean");
+		col4.setEmail("jean.dupont@dev.fr");
+		col4.setMotDePasse(passwordEncoder.encode("superpass"));
+		col4.setRoles(Arrays.asList(new RoleCollegue(col4, Role.ROLE_UTILISATEUR)));
+		this.collegueRepo.save(col4);
+
 		VehiculeSociete ve = new VehiculeSociete();
 		ve.setMarque("Peugeot");
 		ve.setCategorie(Categorie.BERLINE_TAILLE_L);
