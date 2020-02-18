@@ -40,10 +40,11 @@ public class StartupListener {
 	private VehiculePersoRepo vehiculePersoRepo;
 	private ReservationsSocieteRepo resaSocieteRepo;
 	private ReservationsCovoiturageRepo resaCovoiturageRepo;
-	
+
 	public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo,
 			PasswordEncoder passwordEncoder, CollegueRepo collegueRepo, VehiculeSocieteRepo vehiculeSocieteRepo,
-			VehiculePersoRepo vehiculePersoRepo, ReservationsSocieteRepo resaSocieteRepo, ReservationsCovoiturageRepo resaCovoiturageRepo) {
+			VehiculePersoRepo vehiculePersoRepo, ReservationsSocieteRepo resaSocieteRepo,
+			ReservationsCovoiturageRepo resaCovoiturageRepo) {
 		this.appVersion = appVersion;
 		this.versionRepo = versionRepo;
 		this.passwordEncoder = passwordEncoder;
@@ -86,6 +87,14 @@ public class StartupListener {
 				new RoleCollegue(col3, Role.ROLE_CHAUFFEUR)));
 		this.collegueRepo.save(col3);
 
+		Collegue col4 = new Collegue();
+		col4.setNom("Dupont");
+		col4.setPrenom("Jean");
+		col4.setEmail("jean.dupont@dev.fr");
+		col4.setMotDePasse(passwordEncoder.encode("superpass"));
+		col4.setRoles(Arrays.asList(new RoleCollegue(col4, Role.ROLE_UTILISATEUR)));
+		this.collegueRepo.save(col4);
+
 		VehiculeSociete ve = new VehiculeSociete();
 		ve.setMarque("Peugeot");
 		ve.setCategorie(Categorie.BERLINE_TAILLE_L);
@@ -101,7 +110,14 @@ public class StartupListener {
 		veP1.setModele("Scenic");
 		veP1.setNombrePlace(4);
 		this.vehiculePersoRepo.save(veP1);
-		
+
+		VehiculePerso veP2 = new VehiculePerso();
+		veP2.setImmatriculation("DD-123-CC");
+		veP2.setMarque("Ford");
+		veP2.setModele("Focus");
+		veP2.setNombrePlace(4);
+		this.vehiculePersoRepo.save(veP2);
+
 		ReservationsSociete rs1_chauff = new ReservationsSociete();
 		rs1_chauff.setDate(LocalDateTime.of(2020, 02, 25, 10, 00));
 		rs1_chauff.setDateRetour(LocalDateTime.of(2020, 02, 27, 18, 00));
@@ -110,7 +126,7 @@ public class StartupListener {
 		rs1_chauff.setVehicules(ve);
 		rs1_chauff.setAvecChauffeur(true);
 		this.resaSocieteRepo.save(rs1_chauff);
-		
+
 		ReservationsSociete rs2 = new ReservationsSociete();
 		rs2.setDate(LocalDateTime.of(2020, 03, 8, 10, 00));
 		rs2.setDateRetour(LocalDateTime.of(2020, 03, 9, 17, 00));
@@ -118,16 +134,25 @@ public class StartupListener {
 		rs2.setVehicules(ve);
 		rs2.setAvecChauffeur(false);
 		this.resaSocieteRepo.save(rs2);
-		
+
 		ReservationsCovoiturage rc1 = new ReservationsCovoiturage();
 		rc1.setDepart("Lyon");
 		rc1.setDestination("Marseille");
 		rc1.setDate(LocalDateTime.of(2020, 03, 5, 8, 30));
 		rc1.setCollegue(col1);
-		rc1.setListePassagers(Arrays.asList(col1,col3));
+		rc1.setListePassagers(Arrays.asList(col1, col3));
 		rc1.setVehicules(veP1);
 		this.resaCovoiturageRepo.save(rc1);
-	
+
+		ReservationsCovoiturage rc2 = new ReservationsCovoiturage();
+		rc2.setDepart("Montpellier");
+		rc2.setDestination("Brest");
+		rc2.setDate(LocalDateTime.of(2020, 04, 5, 8, 30));
+		rc2.setCollegue(col2);
+		rc2.setListePassagers(Arrays.asList(col1, col3));
+		rc2.setVehicules(veP2);
+		this.resaCovoiturageRepo.save(rc2);
+
 	}
 
 }
