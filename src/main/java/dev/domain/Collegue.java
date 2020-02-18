@@ -1,6 +1,8 @@
 package dev.domain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,13 +35,11 @@ public class Collegue {
 
 	private String urlPhoto;
 
-	// @OneToMany(mappedBy = "collegue")
-	// private Set<ReservationsSociete> reservations = new
-	// HashSet<ReservationsSociete>();
-	//
-	// @OneToMany(mappedBy = "collegue")
-	// private Set<ReservationsCovoiturage> reservationsCovoit = new
-	// HashSet<ReservationsCovoiturage>();
+	@OneToMany(mappedBy = "collegue")
+	private Set<ReservationsSociete> reservations = new HashSet<ReservationsSociete>();
+
+	@OneToMany(mappedBy = "collegue")
+	private Set<ReservationsCovoiturage> reservationsCovoit = new HashSet<ReservationsCovoiturage>();
 
 	public Collegue() {
 		super();
