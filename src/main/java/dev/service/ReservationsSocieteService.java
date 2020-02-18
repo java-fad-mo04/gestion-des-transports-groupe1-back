@@ -13,6 +13,13 @@ import dev.domain.ReservationsSociete;
 import dev.repository.CollegueRepo;
 import dev.repository.ReservationsSocieteRepo;
 
+/**
+ * Classe de service pour les méthodes utilisés par la classe
+ * ReservationsSocieteController
+ * - lister les réservations de véhicule de société
+ * - créer une réservation  de véhicule de société avec ou sans chauffeur
+ */
+
 @Service
 public class ReservationsSocieteService {
 
@@ -26,7 +33,6 @@ public class ReservationsSocieteService {
 	}
 
 	public List<ReservationsSocieteVM> listerReservationsSociete() {
-
 		return this.reservationsSocieteRepo.findAll().stream().map(ReservationsSocieteVM::new)
 				.collect(Collectors.toList());
 	}

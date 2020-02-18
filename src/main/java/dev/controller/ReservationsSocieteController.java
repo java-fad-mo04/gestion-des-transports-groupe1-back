@@ -26,18 +26,32 @@ import dev.service.ReservationsSocieteService;
 public class ReservationsSocieteController {
 
 	private ReservationsSocieteService reservationsSocieteService;
-
+	
+	/**
+	 * 
+	 * @param reservationsSocieteService
+	 */
 	public ReservationsSocieteController(ReservationsSocieteService reservationsSocieteService) {
 		super();
 		this.reservationsSocieteService = reservationsSocieteService;
 	}
 
-
+	/**
+	 * GET reservationsSociete : méthode qui récupere les réservations de véhicules de société
+	 * 
+	 * @return liste de reservations de vehicules de societe (ReservationsSocieteVM)
+	 */
 	@GetMapping
 	public List<ReservationsSocieteVM> listerReservationsSociete() {
 		return this.reservationsSocieteService.listerReservationsSociete();
 	}
 
+	/**
+	 * POST reservationsSociete : créer une réservation de vehicules de societe
+	 * 
+	 * @param resaPost : données json
+	 * @return la reservation créée
+	 */
 	@PostMapping
 	public ResponseEntity<ReservationsSocieteVM> creerReservationSociete(@RequestBody @Valid ReservationsSocieteDTO resaPost) {
 		return ResponseEntity.status(HttpStatus.CREATED)

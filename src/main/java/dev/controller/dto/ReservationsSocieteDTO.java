@@ -14,6 +14,16 @@ public class ReservationsSocieteDTO {
 	private VehiculeSociete vehicule;
 	private Boolean avecChauffeur;
 	
+	/**
+	 * 
+	 * @param date
+	 * @param dateRetour
+	 * @param collegue
+	 * @param chauffeur
+	 * @param vehicule
+	 * @param avecChauffeur
+	 */
+	
 	public ReservationsSocieteDTO(LocalDateTime date, LocalDateTime dateRetour, CollegueVM collegue,
 			CollegueVM chauffeur, VehiculeSociete vehicule, Boolean avecChauffeur) {
 		super();
