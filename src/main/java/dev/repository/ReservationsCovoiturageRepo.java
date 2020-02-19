@@ -19,5 +19,8 @@ public interface ReservationsCovoiturageRepo extends JpaRepository<ReservationsC
 	@Transactional
 	void ajouterPassager(@Param("resa") ReservationsCovoiturage resa, @Param("id") int id);
 
+	@Query("select r from ReservationsCovoiturage r inner join r.listePassagers p where p.id = :idPass")
+	List<ReservationsCovoiturage> listerParPassager(@Param("idPass") long id);
+
 	List<ReservationsCovoiturage> findByCollegue(Collegue col);
 }

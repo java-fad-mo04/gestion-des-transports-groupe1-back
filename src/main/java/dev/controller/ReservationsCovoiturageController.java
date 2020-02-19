@@ -43,9 +43,20 @@ public class ReservationsCovoiturageController {
 	 * @return liste des covoiturages
 	 */
 	@GetMapping(params = "idCol")
-	public List<ReservationCovoiturageVM> listerCovoiturage(@RequestParam("idCol") long idCol) {
+	public List<ReservationCovoiturageVM> listerCovoituragePubliés(@RequestParam("idCol") long idCol) {
 		return this.covoiturageService.listerCovoiturages(idCol);
 
+	}
+
+	/**
+	 * GET /reservationsCovoiturage?idPass=
+	 * 
+	 * @param id
+	 * @return liste des covoiturages reservés par le collegue
+	 */
+	@GetMapping(params = "idPass")
+	public List<ReservationCovoiturageVM> listerCovoiturageReservés(@RequestParam("idPass") long id) {
+		return this.covoiturageService.listerCovoiturageReservés(id);
 	}
 
 	/**
