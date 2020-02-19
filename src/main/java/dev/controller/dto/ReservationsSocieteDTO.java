@@ -23,7 +23,11 @@ public class ReservationsSocieteDTO {
 	 * @param vehicule
 	 * @param avecChauffeur
 	 */
-	
+
+	public ReservationsSocieteDTO() {
+		
+	}
+			
 	public ReservationsSocieteDTO(LocalDateTime date, LocalDateTime dateRetour, CollegueVM collegue,
 			CollegueVM chauffeur, VehiculeSociete vehicule, Boolean avecChauffeur) {
 		super();
