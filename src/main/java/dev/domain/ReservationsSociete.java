@@ -2,9 +2,11 @@ package dev.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class ReservationsSociete extends Reservations {
@@ -19,10 +21,13 @@ public class ReservationsSociete extends Reservations {
 	@JoinColumn(name="ID_VEHICULE")
 	private VehiculeSociete vehicules;
 
+	@Column(columnDefinition = "boolean default false", nullable= false)
+	private Boolean avecChauffeur;
+	
 	public ReservationsSociete() {
 		super();
 	}
-
+	
 	public LocalDateTime getDateRetour() {
 		return dateRetour;
 	}
@@ -46,4 +51,13 @@ public class ReservationsSociete extends Reservations {
 	public void setVehicules(VehiculeSociete vehicules) {
 		this.vehicules = vehicules;
 	}
+
+	public Boolean getAvecChauffeur() {
+		return avecChauffeur;
+	}
+
+	public void setAvecChauffeur(Boolean avecChauffeur) {
+		this.avecChauffeur = avecChauffeur;
+	}
+	
 }
