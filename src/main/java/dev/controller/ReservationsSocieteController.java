@@ -51,7 +51,7 @@ public class ReservationsSocieteController {
 	 * POST reservationsSociete : créer une réservation de vehicules de societe
 	 * 
 	 * @param resaPost : données json
-	 * @return la reservation créée
+	 * @return la reservation créée sinon retourne vide si resa non créée
 	 */
 	@PostMapping
 	public ResponseEntity<ReservationsSocieteVM> creerReservationSociete(@RequestBody @Valid ReservationsSocieteDTO resaPost) {

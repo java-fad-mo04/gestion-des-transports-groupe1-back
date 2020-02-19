@@ -42,21 +42,24 @@ public class ReservationsSocieteService {
 	
 	public ReservationsSocieteVM creerReservationSociete (ReservationsSocieteDTO resaPost) {
 		
-		ReservationsSociete resa = new ReservationsSociete();
-		resa.setDate(resaPost.getDate());
-		resa.setDateRetour(resaPost.getDateRetour());
+		Collegue col = this.collegueRepo.findByEmail(resaPost.getCollegue().getEmail()).orElseThrow(() -> new EntityNotFoundException("collegue non trouvé"));
 		
+		Boolean existResa = this.reservationsSocieteRepo.findByDateDepartAndDateRetourByCollegue(resaPost.getDate(), resaPost.getDateRetour(), col);
 		
-		resa.setCollegue(this.collegueRepo.findByEmail(resaPost.getCollegue().getEmail()).orElseThrow(() -> new EntityNotFoundException("collegue non trouvé")));
-		if(resa.getChauffeur() != null) {
-			resa.setChauffeur(this.collegueRepo.findByEmail(resaPost.getChauffeur().getEmail()).orElseThrow(() -> new EntityNotFoundException("chauffeur non trouvé")));
+		if(!existResa) {
+			ReservationsSociete resa = new ReservationsSociete();
+			resa.setDate(resaPost.getDate());
+			resa.setDateRetour(resaPost.getDateRetour());		
+			resa.setCollegue(col);
+			resa.setVehicules(resaPost.getVehicule());
+			resa.setAvecChauffeur(resaPost.getAvecChauffeur());
+			
+			ReservationsSocieteVM resaVM = new ReservationsSocieteVM(resa);
+			this.reservationsSocieteRepo.save(resa);
+			return resaVM;
 		}
-		
-		resa.setVehicules(resaPost.getVehicule());
-		resa.setAvecChauffeur(resaPost.getAvecChauffeur());
-		
-		ReservationsSocieteVM resaVM = new ReservationsSocieteVM(resa);
-		this.reservationsSocieteRepo.save(resa);
-		return resaVM;
+		else {
+			return null;
+		}
 	}
 }
