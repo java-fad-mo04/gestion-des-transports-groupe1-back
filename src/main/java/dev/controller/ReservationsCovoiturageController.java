@@ -37,14 +37,14 @@ public class ReservationsCovoiturageController {
 	}
 
 	/**
-	 * GET /reservationsCovoiturage. Cette méthode récupère toutes les annonces
-	 * de covoiturage en database
+	 * GET /reservationsCovoiturage?idcol= . Cette méthode récupère toutes les
+	 * annonces de covoiturage en database
 	 * 
 	 * @return liste des covoiturages
 	 */
-	@GetMapping
-	public List<ReservationCovoiturageVM> listerCovoiturage() {
-		return this.covoiturageService.listerCovoiturages();
+	@GetMapping(params = "idCol")
+	public List<ReservationCovoiturageVM> listerCovoiturage(@RequestParam("idCol") long idCol) {
+		return this.covoiturageService.listerCovoiturages(idCol);
 
 	}
 

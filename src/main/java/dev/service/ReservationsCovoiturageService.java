@@ -3,6 +3,8 @@ package dev.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import dev.controller.dto.ReservationsCovoiturageDTO;
@@ -34,8 +36,10 @@ public class ReservationsCovoiturageService {
 		this.collegueRepo = collegueRepo;
 	}
 
-	public List<ReservationCovoiturageVM> listerCovoiturages() {
-		return this.reservationsCovoiturageRepo.findAll().stream().map(ReservationCovoiturageVM::new)
+	public List<ReservationCovoiturageVM> listerCovoiturages(long id) {
+		Collegue col = this.collegueRepo.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("collegue non trouvé"));
+		return this.reservationsCovoiturageRepo.findByCollegue(col).stream().map(ReservationCovoiturageVM::new)
 				.collect(Collectors.toList());
 
 	}
