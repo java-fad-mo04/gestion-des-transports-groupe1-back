@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.controller.dto.ReservationsSocieteDTO;
@@ -37,13 +38,13 @@ public class ReservationsSocieteController {
 	}
 
 	/**
-	 * GET reservationsSociete : méthode qui récupere les réservations de véhicules de société
+	 * GET reservationsSociete : méthode qui récupere les réservations de véhicules de société selon le profil connecté
 	 * 
 	 * @return liste de reservations de vehicules de societe (ReservationsSocieteVM)
 	 */
-	@GetMapping
-	public List<ReservationsSocieteVM> listerReservationsSociete() {
-		return this.reservationsSocieteService.listerReservationsSociete();
+	@GetMapping (params = "idCol")
+	public List<ReservationsSocieteVM> listerReservationsSociete(@RequestParam("idCol") Long idColRequeteHttp) {
+		return this.reservationsSocieteService.listerReservationsSociete(idColRequeteHttp);
 	}
 
 	/**

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import dev.controller.dto.ReservationsSocieteDTO;
 import dev.controller.vm.ReservationsSocieteVM;
+import dev.domain.Collegue;
 import dev.domain.ReservationsSociete;
 import dev.repository.CollegueRepo;
 import dev.repository.ReservationsSocieteRepo;
@@ -32,8 +33,10 @@ public class ReservationsSocieteService {
 		this.collegueRepo = collegueRepo;
 	}
 
-	public List<ReservationsSocieteVM> listerReservationsSociete() {
-		return this.reservationsSocieteRepo.findAll().stream().map(ReservationsSocieteVM::new)
+	public List<ReservationsSocieteVM> listerReservationsSociete(Long idCol) {
+	
+		Collegue col = this.collegueRepo.findById(idCol).orElseThrow(() -> new EntityNotFoundException("collegue non trouvé"));
+		return this.reservationsSocieteRepo.findByCollegue(col).stream().map(ReservationsSocieteVM::new)
 				.collect(Collectors.toList());
 	}
 	
