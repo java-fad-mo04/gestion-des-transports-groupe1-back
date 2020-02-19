@@ -55,8 +55,8 @@ public class ReservationsCovoiturageController {
 	 * @return liste des covoiturages reservés par le collegue
 	 */
 	@GetMapping(params = "idPass")
-	public List<ReservationCovoiturageVM> listerCovoiturageReservés(@RequestParam("idPass") long id) {
-		return this.covoiturageService.listerCovoiturageReservés(id);
+	public List<ReservationCovoiturageVM> listerCovoiturageReserves(@RequestParam("idPass") long id) {
+		return this.covoiturageService.listerCovoiturageReserves(id);
 	}
 
 	/**
@@ -73,6 +73,14 @@ public class ReservationsCovoiturageController {
 		return this.covoiturageService.chercherCovoiturageAvecFiltre(resaDTO);
 	}
 
+	/**
+	 * Patch ajouter un collegue à la liste des passagers
+	 * 
+	 * @param idResa
+	 * @param idCol
+	 * @return
+	 * @throws CollegueNonTrouveException
+	 */
 	@PatchMapping(path = "{idCol}", params = "idResa")
 	public ResponseEntity<?> ajouterPassager(@RequestParam("idResa") int idResa, @PathVariable long idCol)
 			throws CollegueNonTrouveException {
@@ -80,4 +88,13 @@ public class ReservationsCovoiturageController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("passager ajouté en database");
 
 	}
+
+	@PostMapping(params = "idCol")
+	public ResponseEntity<?> creerAnnonce(@RequestBody ReservationsCovoiturageDTO resaDTO,
+			@RequestParam("idCol") long idCol) throws CollegueNonTrouveException {
+		this.covoiturageService.creerAnnonce(idCol, resaDTO);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body("annonce ajoutée en database");
+	}
+
 }
