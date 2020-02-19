@@ -7,6 +7,11 @@ import java.util.stream.Collectors;
 import dev.domain.ReservationsCovoiturage;
 import dev.domain.VehiculePerso;
 
+/**
+ * Structure modèlisant une reservation covoiturage servant à communiquer avec
+ * l'extérieur (WEB API).
+ *
+ */
 public class ReservationCovoiturageVM {
 
 	private LocalDateTime date;

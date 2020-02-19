@@ -5,6 +5,11 @@ import java.time.LocalDateTime;
 import dev.controller.vm.CollegueVM;
 import dev.domain.VehiculePerso;
 
+/**
+ * structure modelisant une reservation avec les données requises pour un post
+ * depuis la web API.
+ *
+ */
 public class ReservationsCovoiturageDTO {
 
 	private LocalDateTime date;
