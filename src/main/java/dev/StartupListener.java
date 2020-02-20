@@ -104,6 +104,15 @@ public class StartupListener {
 		ve.setUrlPhoto("https://i.ytimg.com/vi/fqNzmIkRFHk/maxresdefault.jpg");
 		this.vehiculeSocieteRepo.save(ve);
 
+		VehiculeSociete ve2 = new VehiculeSociete();
+		ve2.setMarque("Honda");
+		ve2.setCategorie(Categorie.BERLINE_TAILLE_S);
+		ve2.setImmatriculation("CA-747-DE");
+		ve2.setModele("Civic");
+		ve2.setStatut(Statut.EN_SERVICE);
+		ve2.setUrlPhoto("https://i.ytimg.com/vi/fqNzmIkRFHk/maxresdefault.jpg");
+		this.vehiculeSocieteRepo.save(ve2);
+		
 		VehiculePerso veP1 = new VehiculePerso();
 		veP1.setImmatriculation("CC-123-CC");
 		veP1.setMarque("Renault");
