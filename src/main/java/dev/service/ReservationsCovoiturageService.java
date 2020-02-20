@@ -11,9 +11,11 @@ import dev.controller.dto.ReservationsCovoiturageDTO;
 import dev.controller.vm.ReservationCovoiturageVM;
 import dev.domain.Collegue;
 import dev.domain.ReservationsCovoiturage;
+import dev.domain.VehiculePerso;
 import dev.exception.CollegueNonTrouveException;
 import dev.repository.CollegueRepo;
 import dev.repository.ReservationsCovoiturageRepo;
+import dev.repository.VehiculePersoRepo;
 
 /**
  * Classe de service pour les méthodes utilisé par la classe
@@ -33,13 +35,21 @@ public class ReservationsCovoiturageService {
 	private CollegueRepo collegueRepo;
 
 	/**
+	 * instancie le repository vehiculePerso
+	 */
+	private VehiculePersoRepo veRepo;
+
+	/**
 	 * @param reservationsCovoiturageRepo
+	 * @param collegueRepo
+	 * @param veRepo
 	 */
 	public ReservationsCovoiturageService(ReservationsCovoiturageRepo reservationsCovoiturageRepo,
-			CollegueRepo collegueRepo) {
+			CollegueRepo collegueRepo, VehiculePersoRepo veRepo) {
 		super();
 		this.reservationsCovoiturageRepo = reservationsCovoiturageRepo;
 		this.collegueRepo = collegueRepo;
+		this.veRepo = veRepo;
 	}
 
 	/**
@@ -65,7 +75,7 @@ public class ReservationsCovoiturageService {
 	 *            du collègue
 	 * @return lise de ces covoiturages reservés
 	 */
-	public List<ReservationCovoiturageVM> listerCovoiturageReservés(long id) {
+	public List<ReservationCovoiturageVM> listerCovoiturageReserves(long id) {
 		return this.reservationsCovoiturageRepo.listerParPassager(id).stream().map(ReservationCovoiturageVM::new)
 				.collect(Collectors.toList());
 	}
@@ -100,6 +110,32 @@ public class ReservationsCovoiturageService {
 				.orElseThrow(() -> new CollegueNonTrouveException(""));
 		resa.getListePassagers().add(col);
 		this.reservationsCovoiturageRepo.ajouterPassager(resa, idResa);
+	}
+
+	/**
+	 * creation d'une annonce de covoiturage
+	 * 
+	 * @param idCol
+	 * @param resaDTO
+	 * @throws CollegueNonTrouveException
+	 */
+	public void creerAnnonce(long idCol, ReservationsCovoiturageDTO resaDTO) throws CollegueNonTrouveException {
+		Collegue col = this.collegueRepo.findById(idCol).orElseThrow(() -> new CollegueNonTrouveException(""));
+
+		VehiculePerso veP = new VehiculePerso();
+		veP.setImmatriculation(resaDTO.getVehicule().getImmatriculation());
+		veP.setMarque(resaDTO.getVehicule().getMarque());
+		veP.setModele(resaDTO.getVehicule().getModele());
+		veP.setNombrePlace(resaDTO.getVehicule().getNombrePlace());
+		this.veRepo.save(veP);
+
+		ReservationsCovoiturage resa = new ReservationsCovoiturage();
+		resa.setCollegue(col);
+		resa.setDate(resaDTO.getDate());
+		resa.setDepart(resaDTO.getDepart());
+		resa.setDestination(resaDTO.getDestination());
+		resa.setVehicules(veP);
+		this.reservationsCovoiturageRepo.save(resa);
 
 	}
 
