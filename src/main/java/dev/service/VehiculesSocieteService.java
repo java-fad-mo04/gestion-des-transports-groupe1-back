@@ -3,11 +3,15 @@ package dev.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityExistsException;
+
 import org.springframework.stereotype.Service;
 
 import dev.repository.VehiculeSocieteRepo;
+import dev.controller.dto.VehiculesSocieteDTO;
 import dev.controller.dto.VehiculesSocieteFiltreDTO;
 import dev.controller.vm.VehiculeSocieteVM;
+import dev.domain.VehiculeSociete;
 
 /**
  * Classe de service pour les méthodes utilisés par la classe
@@ -37,5 +41,24 @@ public class VehiculesSocieteService {
 		return this.vehiculesSocieteRepo.findByImmatriculationOrMarque(vehiculeFiltrePost.getImmatriculation(), vehiculeFiltrePost.getMarque())
 				.stream().map(VehiculeSocieteVM::new)
 				.collect(Collectors.toList());
+	}
+	
+	public void creerVehiculeSociete (VehiculesSocieteDTO vehiculeDTOPost) throws EntityExistsException {
+		
+		if(this.vehiculesSocieteRepo.findByImmatriculationExist(vehiculeDTOPost.getImmatriculation())){
+			throw new EntityExistsException();
+		}
+		
+		VehiculeSociete vehiculeNewPost = new VehiculeSociete();
+		
+		vehiculeNewPost.setImmatriculation(vehiculeDTOPost.getImmatriculation());
+		vehiculeNewPost.setMarque(vehiculeDTOPost.getMarque());
+		vehiculeNewPost.setModele(vehiculeDTOPost.getModele());
+		vehiculeNewPost.setCategorie(vehiculeDTOPost.getCategorie());
+		vehiculeNewPost.setStatut(vehiculeDTOPost.getStatut());
+		vehiculeNewPost.setUrlPhoto(vehiculeDTOPost.getUrlPhoto());
+		
+		this.vehiculesSocieteRepo.save(vehiculeNewPost);
+	
 	}
 }

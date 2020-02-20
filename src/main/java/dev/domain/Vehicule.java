@@ -5,14 +5,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotEmpty;
 
 @MappedSuperclass
 public class Vehicule {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@NotEmpty(message="Marque ne doit pas etre vide")
 	private String marque;
+	
+	@NotEmpty (message="Modele ne doit pas etre vide")
 	private String modele;
+	
+	@NotEmpty (message="Immatriculation ne doit pas etre vide")
 	private String immatriculation;
 	
 	/**
