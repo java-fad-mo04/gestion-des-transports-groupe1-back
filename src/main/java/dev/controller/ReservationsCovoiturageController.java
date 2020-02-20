@@ -89,12 +89,37 @@ public class ReservationsCovoiturageController {
 
 	}
 
+	/**
+	 * Post /reservationsCovoiturage?idCol= publication d'une annonce de
+	 * covoiturage
+	 * 
+	 * @param resaDTO
+	 * @param idCol
+	 * @return
+	 * @throws CollegueNonTrouveException
+	 */
 	@PostMapping(params = "idCol")
 	public ResponseEntity<?> creerAnnonce(@RequestBody ReservationsCovoiturageDTO resaDTO,
 			@RequestParam("idCol") long idCol) throws CollegueNonTrouveException {
 		this.covoiturageService.creerAnnonce(idCol, resaDTO);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body("annonce ajoutée en database");
+	}
+
+	/**
+	 * Patch /reservationsCovoiturage/supprimer/id?idResa= suppression de la
+	 * reservation d'un collegue
+	 * 
+	 * @param idResa
+	 * @param idCol
+	 * @return
+	 * @throws CollegueNonTrouveException
+	 */
+	@PatchMapping(path = "supprimer/{idCol}", params = "idResa")
+	public ResponseEntity<?> supprimerPassager(@RequestParam("idResa") int idResa, @PathVariable long idCol)
+			throws CollegueNonTrouveException {
+		this.covoiturageService.supprimerReservation(idCol, idResa);
+		return ResponseEntity.status(HttpStatus.CREATED).body("passager supprimer de la database");
 	}
 
 }
