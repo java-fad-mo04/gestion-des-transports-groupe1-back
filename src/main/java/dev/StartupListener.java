@@ -113,6 +113,15 @@ public class StartupListener {
 		ve2.setUrlPhoto("https://i.ytimg.com/vi/fqNzmIkRFHk/maxresdefault.jpg");
 		this.vehiculeSocieteRepo.save(ve2);
 		
+		VehiculeSociete ve3 = new VehiculeSociete();
+		ve3.setMarque("Peugeot");
+		ve3.setCategorie(Categorie.SUV);
+		ve3.setImmatriculation("ZC-521-PM");
+		ve3.setModele("5008");
+		ve3.setStatut(Statut.EN_SERVICE);
+		ve3.setUrlPhoto("https://i.ytimg.com/vi/fqNzmIkRFHk/maxresdefault.jpg");
+		this.vehiculeSocieteRepo.save(ve3);
+		
 		VehiculePerso veP1 = new VehiculePerso();
 		veP1.setImmatriculation("CC-123-CC");
 		veP1.setMarque("Renault");

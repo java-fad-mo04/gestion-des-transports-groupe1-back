@@ -5,6 +5,12 @@ import java.time.LocalDateTime;
 import dev.controller.vm.CollegueVM;
 import dev.domain.VehiculeSociete;
 
+/***
+ * classe utilisée par l API ReservationsSocieteController (methode Post) pour passer les données à enregistrer
+ * @author audrey
+ *
+ */
+
 public class ReservationsSocieteDTO {
 
 	private LocalDateTime date;
