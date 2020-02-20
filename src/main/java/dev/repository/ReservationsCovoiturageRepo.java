@@ -23,4 +23,8 @@ public interface ReservationsCovoiturageRepo extends JpaRepository<ReservationsC
 	List<ReservationsCovoiturage> listerParPassager(@Param("idPass") long id);
 
 	List<ReservationsCovoiturage> findByCollegue(Collegue col);
+
+	@Query("select r.listePassagers from ReservationsCovoiturage r where r.id= :idResa")
+	List<Collegue> listerPassagers(@Param("idResa") int idResa);
+
 }

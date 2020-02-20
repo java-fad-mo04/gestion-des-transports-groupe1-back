@@ -139,4 +139,18 @@ public class ReservationsCovoiturageService {
 
 	}
 
+	/**
+	 * suppression d'une resa de covoiturage
+	 * 
+	 * @param idCol
+	 * @param idResa
+	 * @throws CollegueNonTrouveException
+	 */
+	public void supprimerReservation(long idCol, int idResa) throws CollegueNonTrouveException {
+		Collegue col = this.collegueRepo.findById(idCol).orElseThrow(() -> new CollegueNonTrouveException(""));
+		ReservationsCovoiturage resa = this.reservationsCovoiturageRepo.findById(idResa)
+				.orElseThrow(() -> new CollegueNonTrouveException(""));
+		resa.getListePassagers().removeIf(p -> p.getId() == col.getId());
+		this.reservationsCovoiturageRepo.ajouterPassager(resa, idResa);
+	}
 }
