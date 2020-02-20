@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,41 @@ public class VehiculesSocieteService {
 		
 		this.vehiculesSocieteRepo.save(vehiculeNewPost);
 	
+	}
+	
+	public void updaterVehiculeSociete(Long idVehicule, VehiculesSocieteDTO vehiculeDTOPost) throws EntityExistsException {
+		
+		VehiculeSociete vehiculeEdit = this.vehiculesSocieteRepo.findById(idVehicule).orElseThrow(() -> new EntityNotFoundException("Véhicule non trouvé"));
+		
+		if(!vehiculeEdit.getImmatriculation().equals(vehiculeDTOPost.getImmatriculation())) {
+			if(this.vehiculesSocieteRepo.findByImmatriculationExist(vehiculeDTOPost.getImmatriculation())){
+				throw new EntityExistsException();
+			}
+		}
+		
+		if(vehiculeDTOPost.getImmatriculation()!= null) {
+			vehiculeEdit.setImmatriculation(vehiculeDTOPost.getImmatriculation());
+		}
+		
+		if(vehiculeDTOPost.getMarque()!= null) {
+			vehiculeEdit.setMarque(vehiculeDTOPost.getMarque());
+		}
+		
+		if(vehiculeDTOPost.getModele()!= null) {
+			vehiculeEdit.setModele(vehiculeDTOPost.getModele());
+		}
+		
+		if(vehiculeDTOPost.getCategorie()!= null) {
+			vehiculeEdit.setCategorie(vehiculeDTOPost.getCategorie());
+		}
+		
+		if(vehiculeDTOPost.getStatut()!= null) {
+			vehiculeEdit.setStatut(vehiculeDTOPost.getStatut());
+		}
+		
+		if(vehiculeDTOPost.getUrlPhoto()!= null) {
+			vehiculeEdit.setUrlPhoto(vehiculeDTOPost.getUrlPhoto());
+		}
+		this.vehiculesSocieteRepo.save(vehiculeEdit);
 	}
 }

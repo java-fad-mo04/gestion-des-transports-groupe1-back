@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import dev.domain.VehiculeSociete;
 
-public interface VehiculeSocieteRepo extends JpaRepository<VehiculeSociete, Integer> {
+public interface VehiculeSocieteRepo extends JpaRepository<VehiculeSociete, Long> {
 
 	List<VehiculeSociete> findByImmatriculationOrMarque(String immatriculation, String marque);
 	
