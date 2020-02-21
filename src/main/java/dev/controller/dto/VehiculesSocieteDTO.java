@@ -10,7 +10,6 @@ import dev.domain.Statut;
  */
 public class VehiculesSocieteDTO {
 
-	private long id;
 	private String marque;
 	private String modele;
 	private String immatriculation;
@@ -24,7 +23,6 @@ public class VehiculesSocieteDTO {
 	}
 	
 	/**
-	 * @param id
 	 * @param marque
 	 * @param modele
 	 * @param immatriculation
@@ -32,10 +30,9 @@ public class VehiculesSocieteDTO {
 	 * @param statut
 	 * @param urlPhoto
 	 */
-	public VehiculesSocieteDTO(long id, String marque, String modele, String immatriculation, Categorie categorie,
+	public VehiculesSocieteDTO(String marque, String modele, String immatriculation, Categorie categorie,
 			Statut statut, String urlPhoto) {
 		super();
-		this.id = id;
 		this.marque = marque;
 		this.modele = modele;
 		this.immatriculation = immatriculation;
@@ -44,19 +41,6 @@ public class VehiculesSocieteDTO {
 		this.urlPhoto = urlPhoto;
 	}
 
-
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
 	/**
 	 * @return the marque
 	 */
