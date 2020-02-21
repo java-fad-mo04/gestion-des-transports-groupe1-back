@@ -3,14 +3,13 @@ package dev.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.stereotype.Service;
 
 import dev.controller.dto.ReservationsSocieteDTO;
 import dev.controller.vm.ReservationsSocieteVM;
 import dev.domain.Collegue;
 import dev.domain.ReservationsSociete;
+import dev.exception.CollegueNonTrouveException;
 import dev.repository.CollegueRepo;
 import dev.repository.ReservationsSocieteRepo;
 
@@ -33,16 +32,16 @@ public class ReservationsSocieteService {
 		this.collegueRepo = collegueRepo;
 	}
 
-	public List<ReservationsSocieteVM> listerReservationsSociete(Long idCol) {
+	public List<ReservationsSocieteVM> listerReservationsSociete(Long idCol) throws  CollegueNonTrouveException {
 	
-		Collegue col = this.collegueRepo.findById(idCol).orElseThrow(() -> new EntityNotFoundException("collegue non trouvé"));
+		Collegue col = this.collegueRepo.findById(idCol).orElseThrow(() -> new CollegueNonTrouveException(""));
 		return this.reservationsSocieteRepo.findByCollegue(col).stream().map(ReservationsSocieteVM::new)
 				.collect(Collectors.toList());
 	}
 	
-	public ReservationsSocieteVM creerReservationSociete (ReservationsSocieteDTO resaPost) {
+	public ReservationsSocieteVM creerReservationSociete (ReservationsSocieteDTO resaPost) throws CollegueNonTrouveException {
 		
-		Collegue col = this.collegueRepo.findByEmail(resaPost.getCollegue().getEmail()).orElseThrow(() -> new EntityNotFoundException("collegue non trouvé"));
+		Collegue col = this.collegueRepo.findByEmail(resaPost.getCollegue().getEmail()).orElseThrow(() -> new CollegueNonTrouveException(""));
 		
 		Boolean existResa = this.reservationsSocieteRepo.findByDateDepartAndDateRetourByCollegue(resaPost.getDate(), resaPost.getDateRetour(), col);
 		
