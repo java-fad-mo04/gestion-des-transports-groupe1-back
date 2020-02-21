@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.controller.dto.ReservationsSocieteDTO;
 import dev.controller.vm.ReservationsSocieteVM;
+import dev.exception.CollegueNonTrouveException;
 import dev.service.ReservationsSocieteService;
 
 
@@ -43,7 +44,7 @@ public class ReservationsSocieteController {
 	 * @return liste de reservations de vehicules de societe (ReservationsSocieteVM)
 	 */
 	@GetMapping (params = "idCol")
-	public List<ReservationsSocieteVM> listerReservationsSociete(@RequestParam("idCol") Long idColRequeteHttp) {
+	public List<ReservationsSocieteVM> listerReservationsSociete(@RequestParam("idCol") Long idColRequeteHttp) throws CollegueNonTrouveException{
 		return this.reservationsSocieteService.listerReservationsSociete(idColRequeteHttp);
 	}
 
@@ -54,7 +55,7 @@ public class ReservationsSocieteController {
 	 * @return la reservation créée sinon retourne vide si resa non créée
 	 */
 	@PostMapping
-	public ResponseEntity<ReservationsSocieteVM> creerReservationSociete(@RequestBody @Valid ReservationsSocieteDTO resaPost) {
+	public ResponseEntity<ReservationsSocieteVM> creerReservationSociete(@RequestBody @Valid ReservationsSocieteDTO resaPost) throws CollegueNonTrouveException {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(this.reservationsSocieteService.creerReservationSociete(resaPost));
 	}
