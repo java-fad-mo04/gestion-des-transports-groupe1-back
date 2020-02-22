@@ -1,11 +1,13 @@
 package dev.domain;
 
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public class Vehicule {
@@ -20,6 +22,7 @@ public class Vehicule {
 	private String modele;
 	
 	@NotEmpty (message="Immatriculation ne doit pas etre vide")
+	@Size(min = 9, max = 9)
 	private String immatriculation;
 	
 	/**

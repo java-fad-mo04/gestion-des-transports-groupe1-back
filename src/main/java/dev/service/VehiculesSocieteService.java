@@ -3,15 +3,15 @@ package dev.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.stereotype.Service;
 
+import dev.repository.ReservationsSocieteRepo;
 import dev.repository.VehiculeSocieteRepo;
 import dev.controller.dto.VehiculesSocieteDTO;
 import dev.controller.dto.VehiculesSocieteFiltreDTO;
+import dev.controller.vm.ReservationCovoiturageVM;
 import dev.controller.vm.VehiculeSocieteVM;
+import dev.domain.ReservationsSociete;
 import dev.domain.VehiculeSociete;
 import dev.exception.VehiculeNonTrouveException;
 import dev.exception.VehiculeTrouveException;
@@ -22,18 +22,27 @@ import dev.exception.VehiculeTrouveException;
  * - lister les véhicules de société
  * - filtrer les vehicules de societe par immatriculation ou par marque
  * - créer un véhicule de société
+ * - mettre a jour un vehicule de société
+ * - supprimer un véhicule de société
  */
 
 @Service
 public class VehiculesSocieteService {
 
 	private VehiculeSocieteRepo vehiculesSocieteRepo;
-
-	public VehiculesSocieteService(VehiculeSocieteRepo vehiculesSocieteRepo) {
+	private ReservationsSocieteRepo reservationsSocieteRepo;
+	
+	/**
+	 * @param vehiculesSocieteRepo
+	 * @param reservationsSocieteRepo
+	 */
+	public VehiculesSocieteService(VehiculeSocieteRepo vehiculesSocieteRepo,
+			ReservationsSocieteRepo reservationsSocieteRepo) {
 		super();
 		this.vehiculesSocieteRepo = vehiculesSocieteRepo;
+		this.reservationsSocieteRepo = reservationsSocieteRepo;
 	}
-	
+
 	public List<VehiculeSocieteVM> listerVehiculesSociete(){
 
 		return this.vehiculesSocieteRepo.findAll().stream().map(VehiculeSocieteVM::new)
@@ -99,5 +108,23 @@ public class VehiculesSocieteService {
 			vehiculeEdit.setUrlPhoto(vehiculeDTOPost.getUrlPhoto());
 		}
 		this.vehiculesSocieteRepo.save(vehiculeEdit);
+	}
+	
+	public void supprimerVehiculeSociete(Long idVehicule) throws VehiculeNonTrouveException {
+		
+		VehiculeSociete vehicule = this.vehiculesSocieteRepo.findById(idVehicule).orElseThrow(() -> new VehiculeNonTrouveException(""));
+		
+		
+		List<ReservationsSociete> listReservationsSociete = this.reservationsSocieteRepo.findReservationsByVehicules(vehicule);
+		
+		listReservationsSociete.forEach(resa->{
+			//System.out.println(resa.getCollegue().getEmail());
+			//System.out.println(resa.getDate());
+			//envoi mail pour annuler les reservations en cours
+			//supprimer les reservations prévues avec ce véhicule
+			this.reservationsSocieteRepo.delete(resa);
+		});
+			
+		this.vehiculesSocieteRepo.deleteById(idVehicule);
 	}
 }

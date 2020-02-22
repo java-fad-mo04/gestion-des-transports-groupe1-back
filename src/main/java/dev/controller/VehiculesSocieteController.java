@@ -80,4 +80,11 @@ public class VehiculesSocieteController {
 		return ResponseEntity.status(HttpStatus.OK).body("Véhicule modifié");
 	}
 	
+	
+	@PostMapping(value="/supprimer/{idVehicule}")
+	public ResponseEntity<?> supprimerVehiculeSociete(@PathVariable Long idVehicule) throws VehiculeNonTrouveException {
+		
+		this.vehiculesSocieteService.supprimerVehiculeSociete(idVehicule);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Véhicule supprimé en base de données");
+	}
 }
