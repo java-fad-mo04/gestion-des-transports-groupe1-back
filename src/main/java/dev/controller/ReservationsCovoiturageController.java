@@ -136,4 +136,9 @@ public class ReservationsCovoiturageController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("annonce " + idResa + " supprimée");
 	}
 
+	@GetMapping
+	public List<ReservationCovoiturageVM> findAll() {
+		return this.covoiturageService.listerAll();
+	}
+
 }
