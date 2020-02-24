@@ -9,7 +9,6 @@ import dev.repository.ReservationsSocieteRepo;
 import dev.repository.VehiculeSocieteRepo;
 import dev.controller.dto.VehiculesSocieteDTO;
 import dev.controller.dto.VehiculesSocieteFiltreDTO;
-import dev.controller.vm.ReservationCovoiturageVM;
 import dev.controller.vm.VehiculeSocieteVM;
 import dev.domain.ReservationsSociete;
 import dev.domain.VehiculeSociete;
@@ -122,6 +121,8 @@ public class VehiculesSocieteService {
 			//System.out.println(resa.getDate());
 			//envoi mail pour annuler les reservations en cours
 			//supprimer les reservations prévues avec ce véhicule
+			
+			//ProtocoleMail.envoyerMailSMTP(true);
 			this.reservationsSocieteRepo.delete(resa);
 		});
 			
