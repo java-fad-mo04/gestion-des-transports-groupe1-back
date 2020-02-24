@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -120,6 +121,19 @@ public class ReservationsCovoiturageController {
 			throws CollegueNonTrouveException {
 		this.covoiturageService.supprimerReservation(idCol, idResa);
 		return ResponseEntity.status(HttpStatus.CREATED).body("passager supprimer de la database");
+	}
+
+	/**
+	 * Delete /reservationsCovoiturage?idResa= supression du'une annonce de
+	 * covoiturage dans le base de donnée
+	 * 
+	 * @param idResa
+	 * @return
+	 */
+	@DeleteMapping(params = "idResa")
+	public ResponseEntity<String> supprimerAnnonce(@RequestParam("idResa") int idResa) {
+		this.covoiturageService.supprimerAnnonceCvoiturage(idResa);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("annonce " + idResa + " supprimée");
 	}
 
 }

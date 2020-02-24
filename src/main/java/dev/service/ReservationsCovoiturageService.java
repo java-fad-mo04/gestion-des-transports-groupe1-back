@@ -153,4 +153,13 @@ public class ReservationsCovoiturageService {
 		resa.getListePassagers().removeIf(p -> p.getId() == col.getId());
 		this.reservationsCovoiturageRepo.ajouterPassager(resa, idResa);
 	}
+
+	/**
+	 * supression d'une annonce de coivoiturage
+	 * 
+	 * @param idResa
+	 */
+	public void supprimerAnnonceCvoiturage(int idResa) {
+		this.reservationsCovoiturageRepo.deleteById(idResa);
+	}
 }
