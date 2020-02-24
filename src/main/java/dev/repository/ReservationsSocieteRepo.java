@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import dev.domain.Collegue;
 import dev.domain.ReservationsSociete;
+import dev.domain.VehiculeSociete;
 
 /***
  * requete sql table reservationsSociete
@@ -24,4 +25,7 @@ public interface ReservationsSocieteRepo  extends JpaRepository<ReservationsSoci
 	
 	@Query("select case when (count(*) >0) then true else false end from ReservationsSociete rs where date <= :dateRetour and dateRetour >= :dateDepart  and collegue = (:col)")
 	Boolean findByDateDepartAndDateRetourByCollegue(@Param("dateDepart") LocalDateTime dateDepart, @Param("dateRetour") LocalDateTime dateRetour, @Param("col") Collegue col);
+
+	@Query("select rs from ReservationsSociete rs inner join rs.vehicules v where (rs.date >= DATE(NOW()) or rs.dateRetour >=  DATE(NOW())) and v = :idVehicule")
+	List<ReservationsSociete> findReservationsByVehicules(@Param("idVehicule") VehiculeSociete idVehicule);
 }
