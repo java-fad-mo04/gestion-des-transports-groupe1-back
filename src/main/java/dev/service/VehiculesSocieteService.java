@@ -11,6 +11,7 @@ import dev.repository.VehiculeSocieteRepo;
 import dev.utils.ProtocoleMail;
 import dev.controller.dto.VehiculesSocieteDTO;
 import dev.controller.dto.VehiculesSocieteFiltreDTO;
+import dev.controller.vm.ReservationCovoiturageVM;
 import dev.controller.vm.VehiculeSocieteVM;
 import dev.domain.ReservationsSociete;
 import dev.domain.Statut;
@@ -42,9 +43,9 @@ public class VehiculesSocieteService {
 		this.vehiculesSocieteRepo = vehiculesSocieteRepo;
 		this.reservationsSocieteRepo = reservationsSocieteRepo;
 	}
-
-	public List<VehiculeSocieteVM> listerVehiculesSociete() {
-
+  
+	public List<VehiculeSocieteVM> listerVehiculesSociete(){
+    
 		return this.vehiculesSocieteRepo.findAll().stream().map(VehiculeSocieteVM::new).collect(Collectors.toList());
 	}
 
@@ -72,7 +73,6 @@ public class VehiculesSocieteService {
 		} else {
 			vehiculeNewPost.setStatut(Statut.EN_SERVICE);
 		}
-
 		vehiculeNewPost.setUrlPhoto(vehiculeDTOPost.getUrlPhoto());
 
 		this.vehiculesSocieteRepo.save(vehiculeNewPost);
