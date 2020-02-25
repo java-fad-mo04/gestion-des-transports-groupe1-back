@@ -2,6 +2,9 @@ package dev.controller.dto;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
 import dev.controller.vm.CollegueVM;
 import dev.domain.VehiculePerso;
 
@@ -12,10 +15,15 @@ import dev.domain.VehiculePerso;
  */
 public class ReservationsCovoiturageDTO {
 
+	@NotNull
+	@Future
 	private LocalDateTime date;
+	@NotNull
 	private String depart;
+	@NotNull
 	private String destination;
 	private CollegueVM chauffeur;
+	@NotNull
 	private VehiculePerso vehicule;
 
 	/**

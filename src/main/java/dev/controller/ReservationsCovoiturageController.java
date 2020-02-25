@@ -2,6 +2,8 @@ package dev.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -100,7 +102,7 @@ public class ReservationsCovoiturageController {
 	 * @throws CollegueNonTrouveException
 	 */
 	@PostMapping(params = "idCol")
-	public ResponseEntity<?> creerAnnonce(@RequestBody ReservationsCovoiturageDTO resaDTO,
+	public ResponseEntity<?> creerAnnonce(@Valid @RequestBody ReservationsCovoiturageDTO resaDTO,
 			@RequestParam("idCol") long idCol) throws CollegueNonTrouveException {
 		this.covoiturageService.creerAnnonce(idCol, resaDTO);
 
