@@ -13,7 +13,7 @@ import dev.domain.VehiculePerso;
  *
  */
 public class ReservationCovoiturageVM {
-
+	private int id;
 	private LocalDateTime date;
 	private String depart;
 	private String destination;
@@ -22,6 +22,7 @@ public class ReservationCovoiturageVM {
 	private List<CollegueVM> passagers;
 
 	/**
+	 * @param id
 	 * @param date
 	 * @param depart
 	 * @param destination
@@ -30,6 +31,7 @@ public class ReservationCovoiturageVM {
 	 * @param passagers
 	 */
 	public ReservationCovoiturageVM(ReservationsCovoiturage resa) {
+		this.id = resa.getId();
 		this.date = resa.getDate();
 		this.depart = resa.getDepart();
 		this.destination = resa.getDestination();
@@ -151,6 +153,20 @@ public class ReservationCovoiturageVM {
 	 */
 	public void setPassagers(List<CollegueVM> passagers) {
 		this.passagers = passagers;
+	}
+
+	/** Getter
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/** Setter
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
