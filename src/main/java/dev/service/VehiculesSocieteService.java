@@ -9,6 +9,7 @@ import dev.repository.ReservationsSocieteRepo;
 import dev.repository.VehiculeSocieteRepo;
 import dev.controller.dto.VehiculesSocieteDTO;
 import dev.controller.dto.VehiculesSocieteFiltreDTO;
+import dev.controller.vm.ReservationCovoiturageVM;
 import dev.controller.vm.VehiculeSocieteVM;
 import dev.domain.ReservationsSociete;
 import dev.domain.Statut;
