@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,10 @@ import dev.service.VehiculesSocieteService;
  * controller get et post pour les vehicules de societe
  * - lister les vehicules de societe
  * - filtrer les vehicules de societe par immatriculation et marque
+ * - creer un vehicule
+ * - mettre a jour un vehicule
+ * - supprimer un vehicule
+ * 
  * @author audrey
  *
  */
@@ -63,6 +68,13 @@ public class VehiculesSocieteController {
 		return this.vehiculesSocieteService.chercherVehiculeAvecFiltre(vehiculeDTO);
 	}
 	
+	/**
+	 * POST /vehiculesSociete/creer
+	 * 
+	 * @param vehiculeDTO : données json
+	
+	 * @return texte si véhicule a bien été ajouté
+	 */
 	@PostMapping(value="/creer")
 	public ResponseEntity<?> creerVehiculeSociete(@RequestBody @Valid VehiculesSocieteDTO vehiculePost) throws VehiculeTrouveException {
 		
@@ -70,9 +82,15 @@ public class VehiculesSocieteController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("Véhicule ajouté en base de données");
 	}
 	
+	/**
+	 * PATCH /vehiculesSociete/editer/idVehicule
+	 * 
+	 * @param vehiculeDTO : données json
+	 * @param idVehicule : type Long
 	
-	
-	@PatchMapping(value="/creer/{idVehicule}")
+	 * @return texte si véhicule modifié
+	 */
+	@PatchMapping(value="/editer/{idVehicule}")
 	public ResponseEntity<?> updaterVehiculeSociete(@PathVariable Long idVehicule,
 			@RequestBody VehiculesSocieteDTO vehiculePost) throws VehiculeTrouveException,VehiculeNonTrouveException {
 
@@ -80,8 +98,14 @@ public class VehiculesSocieteController {
 		return ResponseEntity.status(HttpStatus.OK).body("Véhicule modifié");
 	}
 	
+	/**
+	 * DELETE /vehiculesSociete/supprimer/idVehicule
+	 * 
+	 * @param idVehicule : type Long
 	
-	@PostMapping(value="/supprimer/{idVehicule}")
+	 * @return texte si vehicule supprimé
+	 */
+	@DeleteMapping(value="/supprimer/{idVehicule}")
 	public ResponseEntity<?> supprimerVehiculeSociete(@PathVariable Long idVehicule) throws VehiculeNonTrouveException {
 		
 		this.vehiculesSocieteService.supprimerVehiculeSociete(idVehicule);

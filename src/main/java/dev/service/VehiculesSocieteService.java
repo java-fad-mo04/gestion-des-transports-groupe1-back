@@ -11,6 +11,7 @@ import dev.controller.dto.VehiculesSocieteDTO;
 import dev.controller.dto.VehiculesSocieteFiltreDTO;
 import dev.controller.vm.VehiculeSocieteVM;
 import dev.domain.ReservationsSociete;
+import dev.domain.Statut;
 import dev.domain.VehiculeSociete;
 import dev.exception.VehiculeNonTrouveException;
 import dev.exception.VehiculeTrouveException;
@@ -66,7 +67,14 @@ public class VehiculesSocieteService {
 		vehiculeNewPost.setMarque(vehiculeDTOPost.getMarque());
 		vehiculeNewPost.setModele(vehiculeDTOPost.getModele());
 		vehiculeNewPost.setCategorie(vehiculeDTOPost.getCategorie());
-		vehiculeNewPost.setStatut(vehiculeDTOPost.getStatut());
+		
+		if(vehiculeDTOPost.getStatut()!= null) {
+			vehiculeNewPost.setStatut(vehiculeDTOPost.getStatut());
+		}
+		else {
+			vehiculeNewPost.setStatut(Statut.EN_SERVICE);
+		}
+		
 		vehiculeNewPost.setUrlPhoto(vehiculeDTOPost.getUrlPhoto());
 		
 		this.vehiculesSocieteRepo.save(vehiculeNewPost);

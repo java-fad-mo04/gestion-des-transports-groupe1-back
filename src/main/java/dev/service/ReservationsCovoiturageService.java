@@ -88,6 +88,7 @@ public class ReservationsCovoiturageService {
 	 * @return liste des covoiturages filtrés par date destination et départ
 	 */
 	public List<ReservationCovoiturageVM> chercherCovoiturageAvecFiltre(ReservationsCovoiturageDTO resaDTO) {
+
 		return this.reservationsCovoiturageRepo.findAll().stream()
 				.filter(resa -> resaDTO.getDepart().equalsIgnoreCase(resa.getDepart())
 						&& resaDTO.getDestination().equalsIgnoreCase(resa.getDestination())
@@ -152,5 +153,24 @@ public class ReservationsCovoiturageService {
 				.orElseThrow(() -> new CollegueNonTrouveException(""));
 		resa.getListePassagers().removeIf(p -> p.getId() == col.getId());
 		this.reservationsCovoiturageRepo.ajouterPassager(resa, idResa);
+	}
+
+	/**
+	 * supression d'une annonce de coivoiturage
+	 * 
+	 * @param idResa
+	 */
+	public void supprimerAnnonceCvoiturage(int idResa) {
+		this.reservationsCovoiturageRepo.deleteById(idResa);
+	}
+
+	/**
+	 * lister touts les resa de covoiturage
+	 * 
+	 * @return liste de resa REservationsCovoiturageVM
+	 */
+	public List<ReservationCovoiturageVM> listerAll() {
+		return this.reservationsCovoiturageRepo.findAll().stream().map(ReservationCovoiturageVM::new)
+				.collect(Collectors.toList());
 	}
 }
