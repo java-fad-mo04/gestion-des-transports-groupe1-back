@@ -22,4 +22,9 @@ public class ExceptionHandler {
 	public ResponseEntity<String> VehiculePresent(VehiculeTrouveException exception) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Véhicule de société déjà existant");
 	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(value = { FormErrorException.class })
+	public ResponseEntity<String> FormError(FormErrorException exception) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+	}
 }
