@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.controller.dto.ReservationsSocieteDTO;
 import dev.controller.vm.ReservationsSocieteVM;
 import dev.exception.CollegueNonTrouveException;
+import dev.exception.FormErrorException;
+import dev.exception.VehiculeNonTrouveException;
 import dev.service.ReservationsSocieteService;
 
 
@@ -55,7 +57,7 @@ public class ReservationsSocieteController {
 	 * @return la reservation créée sinon retourne vide si resa non créée
 	 */
 	@PostMapping
-	public ResponseEntity<ReservationsSocieteVM> creerReservationSociete(@RequestBody @Valid ReservationsSocieteDTO resaPost) throws CollegueNonTrouveException {
+	public ResponseEntity<ReservationsSocieteVM> creerReservationSociete(@RequestBody @Valid ReservationsSocieteDTO resaPost) throws CollegueNonTrouveException, VehiculeNonTrouveException, FormErrorException {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(this.reservationsSocieteService.creerReservationSociete(resaPost));
 	}

@@ -1,5 +1,7 @@
 package dev.controller.dto;
 
+import javax.validation.constraints.NotNull;
+
 import dev.domain.Categorie;
 import dev.domain.Statut;
 
@@ -10,12 +12,18 @@ import dev.domain.Statut;
  */
 public class VehiculesSocieteDTO {
 
+	@NotNull
 	private String marque;
+	@NotNull
 	private String modele;
+	@NotNull
 	private String immatriculation;
 	
+	@NotNull
 	private Categorie categorie;
+	
 	private Statut statut;
+	@NotNull
 	private String urlPhoto;
 	
 	public VehiculesSocieteDTO() {
