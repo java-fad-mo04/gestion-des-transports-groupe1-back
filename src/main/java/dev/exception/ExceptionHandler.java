@@ -1,5 +1,7 @@
 package dev.exception;
 
+import javax.persistence.EntityExistsException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,15 +13,19 @@ public class ExceptionHandler {
 	public ResponseEntity<String> reservationPresent(CollegueNonTrouveException exception) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("collègue non trouvé");
 	}
-	
-	
+
 	@org.springframework.web.bind.annotation.ExceptionHandler(value = { VehiculeNonTrouveException.class })
 	public ResponseEntity<String> vehiculeNonPresent(VehiculeNonTrouveException exception) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Véhicule non trouvé");
 	}
-	
+
 	@org.springframework.web.bind.annotation.ExceptionHandler(value = { VehiculeTrouveException.class })
 	public ResponseEntity<String> VehiculePresent(VehiculeTrouveException exception) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Véhicule de société déjà existant");
+	}
+
+	@org.springframework.web.bind.annotation.ExceptionHandler(value = { EntityExistsException.class })
+	public ResponseEntity<String> exist(EntityExistsException exception) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("deja passager");
 	}
 }
