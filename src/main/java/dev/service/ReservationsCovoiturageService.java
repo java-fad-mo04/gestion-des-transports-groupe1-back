@@ -1,6 +1,5 @@
 package dev.service;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +16,6 @@ import dev.exception.CollegueNonTrouveException;
 import dev.repository.CollegueRepo;
 import dev.repository.ReservationsCovoiturageRepo;
 import dev.repository.VehiculePersoRepo;
-import dev.utils.ProtocoleMail;
 
 /**
  * Classe de service pour les méthodes utilisé par la classe
@@ -155,15 +153,23 @@ public class ReservationsCovoiturageService {
 				.orElseThrow(() -> new CollegueNonTrouveException(""));
 		resa.getListePassagers().removeIf(p -> p.getId() == col.getId());
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm");
-		String messageEmail1 = " le passager " + col.getPrenom() + " " + col.getNom().toUpperCase()
-				+ " a annulé sa reservation pour le coivoiturage prévu le " + resa.getDate().format(formatter)
-				+ " au départ de " + resa.getDepart() + " et à destination de " + resa.getDestination();
-		String messageEmail2 = "Votre réservation de covoiturage prévue le " + resa.getDate().format(formatter)
-				+ " au départ de " + resa.getDepart() + " et à destination de " + resa.getDestination()
-				+ " a bien été annulée";
-		ProtocoleMail.envoyerMailSMTP("Reservation Covoiturage annulé", resa.getCollegue().getEmail(), messageEmail1);
-		ProtocoleMail.envoyerMailSMTP("Reservation Covoiturage annulé", col.getEmail(), messageEmail2);
+		/*
+		 * DateTimeFormatter formatter =
+		 * DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm"); String
+		 * messageEmail1 = " le passager " + col.getPrenom() + " " +
+		 * col.getNom().toUpperCase() +
+		 * " a annulé sa reservation pour le coivoiturage prévu le " +
+		 * resa.getDate().format(formatter) + " au départ de " +
+		 * resa.getDepart() + " et à destination de " + resa.getDestination();
+		 * String messageEmail2 = "Votre réservation de covoiturage prévue le "
+		 * + resa.getDate().format(formatter) + " au départ de " +
+		 * resa.getDepart() + " et à destination de " + resa.getDestination() +
+		 * " a bien été annulée";
+		 * ProtocoleMail.envoyerMailSMTP("Reservation Covoiturage annulé",
+		 * resa.getCollegue().getEmail(), messageEmail1);
+		 * ProtocoleMail.envoyerMailSMTP("Reservation Covoiturage annulé",
+		 * col.getEmail(), messageEmail2);
+		 */
 		this.reservationsCovoiturageRepo.ajouterPassager(resa, idResa);
 	}
 
@@ -173,23 +179,26 @@ public class ReservationsCovoiturageService {
 	 * @param idResa
 	 */
 	public void supprimerAnnonceCvoiturage(int idResa) {
-		
-		this.reservationsCovoiturageRepo.findById(idResa)
-				.orElseThrow(() -> new EntityNotFoundException("reservation non trouvée")).getListePassagers()
-				.forEach(col -> {
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm");
-					String messageEmail = "Votre covoiturage prévu le "
-							+ this.reservationsCovoiturageRepo.findById(idResa).get().getDate().format(formatter)
-							+ " au départ de " + this.reservationsCovoiturageRepo.findById(idResa).get().getDepart()
-							+ " et à destination de "
-							+ this.reservationsCovoiturageRepo.findById(idResa).get().getDestination()
-							+ " a été annulée.";
 
-					ProtocoleMail.envoyerMailSMTP("Covoiturage annulé", col.getEmail(), messageEmail);
-					ProtocoleMail.envoyerMailSMTP("Covoiturage annulé",
-							this.reservationsCovoiturageRepo.findById(idResa).get().getCollegue().getEmail(),
-							messageEmail);
-				});
+		/*
+		 * this.reservationsCovoiturageRepo.findById(idResa) .orElseThrow(() ->
+		 * new
+		 * EntityNotFoundException("reservation non trouvée")).getListePassagers
+		 * () .forEach(col -> { DateTimeFormatter formatter =
+		 * DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm"); String
+		 * messageEmail = "Votre covoiturage prévu le " +
+		 * this.reservationsCovoiturageRepo.findById(idResa).get().getDate().
+		 * format(formatter) + " au départ de " +
+		 * this.reservationsCovoiturageRepo.findById(idResa).get().getDepart() +
+		 * " et à destination de " +
+		 * this.reservationsCovoiturageRepo.findById(idResa).get().
+		 * getDestination() + " a été annulée.";
+		 * 
+		 * ProtocoleMail.envoyerMailSMTP("Covoiturage annulé", col.getEmail(),
+		 * messageEmail); ProtocoleMail.envoyerMailSMTP("Covoiturage annulé",
+		 * this.reservationsCovoiturageRepo.findById(idResa).get().getCollegue()
+		 * .getEmail(), messageEmail); });
+		 */
 		this.reservationsCovoiturageRepo.deleteById(idResa);
 	}
 
