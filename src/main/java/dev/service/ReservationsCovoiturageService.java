@@ -164,7 +164,6 @@ public class ReservationsCovoiturageService {
 				+ " a bien été annulée";
 		ProtocoleMail.envoyerMailSMTP("Reservation Covoiturage annulé", resa.getCollegue().getEmail(), messageEmail1);
 		ProtocoleMail.envoyerMailSMTP("Reservation Covoiturage annulé", col.getEmail(), messageEmail2);
-
 		this.reservationsCovoiturageRepo.ajouterPassager(resa, idResa);
 	}
 
@@ -174,7 +173,7 @@ public class ReservationsCovoiturageService {
 	 * @param idResa
 	 */
 	public void supprimerAnnonceCvoiturage(int idResa) {
-		this.reservationsCovoiturageRepo.deleteById(idResa);
+		
 		this.reservationsCovoiturageRepo.findById(idResa)
 				.orElseThrow(() -> new EntityNotFoundException("reservation non trouvée")).getListePassagers()
 				.forEach(col -> {
@@ -191,6 +190,7 @@ public class ReservationsCovoiturageService {
 							this.reservationsCovoiturageRepo.findById(idResa).get().getCollegue().getEmail(),
 							messageEmail);
 				});
+		this.reservationsCovoiturageRepo.deleteById(idResa);
 	}
 
 	/**

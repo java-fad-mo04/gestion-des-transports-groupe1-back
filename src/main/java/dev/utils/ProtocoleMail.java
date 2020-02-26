@@ -8,12 +8,12 @@ import java.util.*;
  * Classe permettant d'envoyer un mail.
  */
 public class ProtocoleMail {
-	private final static String MAILER_VERSION = "Java";
 
 	static ResourceBundle monFichierConf = ResourceBundle.getBundle("informations");
 	private static String username = monFichierConf.getString("protocole.email");
-	private static String password = monFichierConf.getString("protocle.password");
-
+	private static String password = monFichierConf.getString("protocole.password");
+	private static String emailadmin = monFichierConf.getString("protocole.emailadmin");
+	
 	public static boolean envoyerMailSMTP(String sujet, String emailDest, String messageCorps) {
 		boolean result = false;
 
@@ -34,10 +34,14 @@ public class ProtocoleMail {
 
 			Session session = Session.getDefaultInstance(prop, auth);
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("transportgestion.groupe1@gmail.com"));
+			message.setFrom(new InternetAddress(username));
 			InternetAddress[] internetAddresses = new InternetAddress[1];
 			internetAddresses[0] = new InternetAddress(emailDest);
 			message.setRecipients(Message.RecipientType.TO, internetAddresses);
+			
+			InternetAddress[] internetAddressesCopy = new InternetAddress[1];
+			internetAddressesCopy[0] = new InternetAddress(emailadmin);
+			message.setRecipients(Message.RecipientType.BCC, internetAddressesCopy);
 			message.setSubject(sujet);
 			message.setHeader("Content-Type", "multipart/mixed");
 			message.setSentDate(new Date());
