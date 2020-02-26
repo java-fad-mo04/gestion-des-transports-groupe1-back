@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.stereotype.Service;
@@ -111,8 +112,17 @@ public class ReservationsCovoiturageService {
 		Collegue col = this.collegueRepo.findById(idColl).orElseThrow(() -> new CollegueNonTrouveException(""));
 		ReservationsCovoiturage resa = this.reservationsCovoiturageRepo.findById(idResa)
 				.orElseThrow(() -> new CollegueNonTrouveException(""));
-		resa.getListePassagers().add(col);
-		this.reservationsCovoiturageRepo.ajouterPassager(resa, idResa);
+		List<Long> collect = resa.getListePassagers().stream().map(pass -> pass.getId()).filter(p -> p == col.getId())
+				.collect(Collectors.toList());
+
+		if (collect.isEmpty()) {
+			resa.getListePassagers().add(col);
+			this.reservationsCovoiturageRepo.ajouterPassager(resa, idResa);
+		} else {
+			throw new EntityExistsException();
+
+		}
+
 	}
 
 	/**
