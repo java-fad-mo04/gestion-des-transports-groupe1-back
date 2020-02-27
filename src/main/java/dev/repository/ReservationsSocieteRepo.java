@@ -27,5 +27,8 @@ public interface ReservationsSocieteRepo  extends JpaRepository<ReservationsSoci
 	Boolean findByDateDepartAndDateRetourByCollegue(@Param("dateDepart") LocalDateTime dateDepart, @Param("dateRetour") LocalDateTime dateRetour, @Param("col") Collegue col);
 
 	@Query("select rs from ReservationsSociete rs inner join rs.vehicules v where (rs.date >= DATE(NOW()) or rs.dateRetour >=  DATE(NOW())) and v = :idVehicule")
-	List<ReservationsSociete> findReservationsByVehicules(@Param("idVehicule") VehiculeSociete idVehicule);
+	List<ReservationsSociete> findReservationsByDateVehicules(@Param("idVehicule") VehiculeSociete idVehicule);
+	
+	
+	List<ReservationsSociete> findReservationsByVehicules(VehiculeSociete idVehicule);
 }

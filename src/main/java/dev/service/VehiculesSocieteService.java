@@ -20,11 +20,13 @@ import dev.exception.VehiculeNonTrouveException;
 import dev.exception.VehiculeTrouveException;
 
 /**
- * Classe de service pour les méthodes utilisés par la classe
- * VehiculesSocieteController - lister les véhicules de société - filtrer les
- * vehicules de societe par immatriculation ou par marque - créer un véhicule de
- * société - mettre a jour un vehicule de société - supprimer un véhicule de
- * société
+ * Classe de service pour les méthodes utilisés par la classe VehiculesSocieteController 
+ * - lister les véhicules de société 
+ * - filtrer les vehicules de societe par immatriculation ou par marque 
+ * - créer un véhicule de société 
+ * - mettre a jour un vehicule de société 
+ * - supprimer un véhicule de société
+ * - afficher un vehicule de societe choisi
  */
 
 @Service
@@ -43,7 +45,7 @@ public class VehiculesSocieteService {
 		this.vehiculesSocieteRepo = vehiculesSocieteRepo;
 		this.reservationsSocieteRepo = reservationsSocieteRepo;
 	}
-  
+	
 	public List<VehiculeSocieteVM> listerVehiculesSociete(){
     
 		return this.vehiculesSocieteRepo.findAll().stream().map(VehiculeSocieteVM::new).collect(Collectors.toList());
@@ -113,7 +115,7 @@ public class VehiculesSocieteService {
 			if (!vehiculeDTOPost.getStatut().equals(Statut.EN_SERVICE)) {
 
 				List<ReservationsSociete> listReservationsSociete = this.reservationsSocieteRepo
-						.findReservationsByVehicules(vehiculeEdit);
+						.findReservationsByDateVehicules(vehiculeEdit);
 
 				listReservationsSociete.forEach(resa -> {
 					// envoi mail pour annuler les reservations en cours
@@ -141,7 +143,7 @@ public class VehiculesSocieteService {
 				.orElseThrow(() -> new VehiculeNonTrouveException(""));
 
 		List<ReservationsSociete> listReservationsSociete = this.reservationsSocieteRepo
-				.findReservationsByVehicules(vehicule);
+				.findReservationsByDateVehicules(vehicule);
 
 		listReservationsSociete.forEach(resa -> {
 			// envoi mail pour annuler les reservations en cours
@@ -155,5 +157,12 @@ public class VehiculesSocieteService {
 		});
 
 		this.vehiculesSocieteRepo.deleteById(idVehicule);
+	}
+	
+	public VehiculeSocieteVM afficherDetailsVehiculesSociete(String immatriculation) throws VehiculeNonTrouveException {
+	    
+		VehiculeSociete vehicule = this.vehiculesSocieteRepo.findByImmatriculation(immatriculation).orElseThrow(() -> new VehiculeNonTrouveException(""));
+		//VehiculeSocieteVM vehVM = new VehiculeSocieteVM(vehicule);
+		return new VehiculeSocieteVM(vehicule);
 	}
 }
