@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +61,13 @@ public class ReservationsSocieteController {
 	public ResponseEntity<ReservationsSocieteVM> creerReservationSociete(@RequestBody @Valid ReservationsSocieteDTO resaPost) throws CollegueNonTrouveException, VehiculeNonTrouveException, FormErrorException {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(this.reservationsSocieteService.creerReservationSociete(resaPost));
+	}
+	
+	@GetMapping(params = "idVehicule")
+	public List<ReservationsSocieteVM> listerReservationParVehicule(@RequestParam("idVehicule") Long idVehicule) throws VehiculeNonTrouveException {
+		
+		return this.reservationsSocieteService.listerReservationParVehicule(idVehicule);
+		
 	}
 	
 }

@@ -170,7 +170,25 @@ public class StartupListener {
 		rc2.setListePassagers(Arrays.asList(col1, col3));
 		rc2.setVehicules(veP2);
 		this.resaCovoiturageRepo.save(rc2);
+		
+		ReservationsCovoiturage rc3 = new ReservationsCovoiturage();
+		rc3.setDepart("Montpellier");
+		rc3.setDestination("Brest");
+		rc3.setDate(LocalDateTime.of(2020, 01, 5, 8, 30));
+		rc3.setCollegue(col2);
+		rc3.setListePassagers(Arrays.asList(col1, col3));
+		rc3.setVehicules(veP2);
+		this.resaCovoiturageRepo.save(rc3);
 
+		ReservationsCovoiturage rc4 = new ReservationsCovoiturage();
+		rc4.setDepart("Paris");
+		rc4.setDestination("Nantes");
+		rc4.setDate(LocalDateTime.of(2020, 02, 5, 7, 15));
+		rc4.setCollegue(col1);
+		rc4.setListePassagers(Arrays.asList(col1, col3));
+		rc4.setVehicules(veP1);
+		this.resaCovoiturageRepo.save(rc4);
+		
 	}
 
 }

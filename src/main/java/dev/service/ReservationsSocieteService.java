@@ -77,4 +77,13 @@ public class ReservationsSocieteService {
 			throw new FormErrorException("Une réservation est déjà existente à cette période");
 		}
 	}
+	
+	
+	public List<ReservationsSocieteVM> listerReservationParVehicule(Long idVehicule) throws VehiculeNonTrouveException {
+		
+		VehiculeSociete vehicule = this.vehiculeSocieteRepo.findById(idVehicule).orElseThrow(() -> new VehiculeNonTrouveException(""));
+		
+		return this.reservationsSocieteRepo.findReservationsByVehicules(vehicule).stream().map(ReservationsSocieteVM::new)
+		.collect(Collectors.toList());
+	}
 }

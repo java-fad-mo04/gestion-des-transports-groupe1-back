@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.controller.dto.VehiculesSocieteDTO;
 import dev.controller.dto.VehiculesSocieteFiltreDTO;
+import dev.controller.vm.ReservationsSocieteVM;
 import dev.controller.vm.VehiculeSocieteVM;
 import dev.exception.VehiculeNonTrouveException;
 import dev.exception.VehiculeTrouveException;
@@ -40,6 +41,7 @@ public class VehiculesSocieteController {
 
 	private VehiculesSocieteService vehiculesSocieteService;
 
+	
 	public VehiculesSocieteController(VehiculesSocieteService vehiculesSocieteService) {
 		super();
 		this.vehiculesSocieteService = vehiculesSocieteService;
@@ -110,5 +112,10 @@ public class VehiculesSocieteController {
 		
 		this.vehiculesSocieteService.supprimerVehiculeSociete(idVehicule);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Véhicule supprimé en base de données");
+	}
+	
+	@GetMapping(value="/afficher/{immatriculation}")
+	public VehiculeSocieteVM afficherDetailsVehiculesSociete(@PathVariable String immatriculation) throws VehiculeNonTrouveException {
+		return this.vehiculesSocieteService.afficherDetailsVehiculesSociete(immatriculation);
 	}
 }
