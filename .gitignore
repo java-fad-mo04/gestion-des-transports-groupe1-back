@@ -25,6 +25,7 @@ dist/
 nbdist/
 .nb-gradle/
 
+monFichierConf.properties
 
 # Compiled class file
 *.class

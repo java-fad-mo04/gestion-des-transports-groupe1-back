@@ -6,27 +6,24 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import dev.repository.ReservationsSocieteRepo;
-import dev.repository.VehiculeSocieteRepo;
-import dev.utils.ProtocoleMail;
 import dev.controller.dto.VehiculesSocieteDTO;
 import dev.controller.dto.VehiculesSocieteFiltreDTO;
-import dev.controller.vm.ReservationCovoiturageVM;
 import dev.controller.vm.VehiculeSocieteVM;
 import dev.domain.ReservationsSociete;
 import dev.domain.Statut;
 import dev.domain.VehiculeSociete;
 import dev.exception.VehiculeNonTrouveException;
 import dev.exception.VehiculeTrouveException;
+import dev.repository.ReservationsSocieteRepo;
+import dev.repository.VehiculeSocieteRepo;
+import dev.utils.ProtocoleMail;
 
 /**
- * Classe de service pour les méthodes utilisés par la classe VehiculesSocieteController 
- * - lister les véhicules de société 
- * - filtrer les vehicules de societe par immatriculation ou par marque 
- * - créer un véhicule de société 
- * - mettre a jour un vehicule de société 
- * - supprimer un véhicule de société
- * - afficher un vehicule de societe choisi
+ * Classe de service pour les méthodes utilisés par la classe
+ * VehiculesSocieteController - lister les véhicules de société - filtrer les
+ * vehicules de societe par immatriculation ou par marque - créer un véhicule de
+ * société - mettre a jour un vehicule de société - supprimer un véhicule de
+ * société - afficher un vehicule de societe choisi
  */
 
 @Service
@@ -45,9 +42,9 @@ public class VehiculesSocieteService {
 		this.vehiculesSocieteRepo = vehiculesSocieteRepo;
 		this.reservationsSocieteRepo = reservationsSocieteRepo;
 	}
-	
-	public List<VehiculeSocieteVM> listerVehiculesSociete(){
-    
+
+	public List<VehiculeSocieteVM> listerVehiculesSociete() {
+
 		return this.vehiculesSocieteRepo.findAll().stream().map(VehiculeSocieteVM::new).collect(Collectors.toList());
 	}
 
@@ -122,8 +119,8 @@ public class VehiculesSocieteService {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm");
 					String messageEmail = "Votre réservation prévu le " + resa.getDate().format(formatter)
 							+ " a été annulée.<br/>Le véhicule réservé n'est plus disponible à cette période.";
-					
-					ProtocoleMail.envoyerMailSMTP("Réservation annulée",resa.getCollegue().getEmail(), messageEmail);
+
+					ProtocoleMail.envoyerMailSMTP("Réservation annulée", resa.getCollegue().getEmail(), messageEmail);
 
 					// supprimer les reservations prévues avec ce véhicule
 					this.reservationsSocieteRepo.delete(resa);
@@ -150,7 +147,7 @@ public class VehiculesSocieteService {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy à HH:mm");
 			String messageEmail = "Votre réservation prévu le " + resa.getDate().format(formatter)
 					+ " a été annulée.<br/>Le véhicule réservé n'est plus disponible à cette période.";
-			ProtocoleMail.envoyerMailSMTP("Réservation annulée",resa.getCollegue().getEmail(), messageEmail);
+			ProtocoleMail.envoyerMailSMTP("Réservation annulée", resa.getCollegue().getEmail(), messageEmail);
 
 			// supprimer les reservations prévues avec ce véhicule
 			this.reservationsSocieteRepo.delete(resa);
@@ -158,11 +155,12 @@ public class VehiculesSocieteService {
 
 		this.vehiculesSocieteRepo.deleteById(idVehicule);
 	}
-	
+
 	public VehiculeSocieteVM afficherDetailsVehiculesSociete(String immatriculation) throws VehiculeNonTrouveException {
-	    
-		VehiculeSociete vehicule = this.vehiculesSocieteRepo.findByImmatriculation(immatriculation).orElseThrow(() -> new VehiculeNonTrouveException(""));
-		//VehiculeSocieteVM vehVM = new VehiculeSocieteVM(vehicule);
+
+		VehiculeSociete vehicule = this.vehiculesSocieteRepo.findByImmatriculation(immatriculation)
+				.orElseThrow(() -> new VehiculeNonTrouveException(""));
+		// VehiculeSocieteVM vehVM = new VehiculeSocieteVM(vehicule);
 		return new VehiculeSocieteVM(vehicule);
 	}
 }
