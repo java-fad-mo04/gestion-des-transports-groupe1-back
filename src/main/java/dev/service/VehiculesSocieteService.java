@@ -84,13 +84,13 @@ public class VehiculesSocieteService {
 		VehiculeSociete vehiculeEdit = this.vehiculesSocieteRepo.findById(idVehicule)
 				.orElseThrow(() -> new VehiculeNonTrouveException(""));
 
-		if (!vehiculeEdit.getImmatriculation().equals(vehiculeDTOPost.getImmatriculation())) {
-			if (this.vehiculesSocieteRepo.findByImmatriculationExist(vehiculeDTOPost.getImmatriculation())) {
-				throw new VehiculeTrouveException("");
-			}
-		}
 
 		if (vehiculeDTOPost.getImmatriculation() != null) {
+			if (!vehiculeEdit.getImmatriculation().equals(vehiculeDTOPost.getImmatriculation())) {
+				if (this.vehiculesSocieteRepo.findByImmatriculationExist(vehiculeDTOPost.getImmatriculation())) {
+					throw new VehiculeTrouveException("");
+				}
+			}
 			vehiculeEdit.setImmatriculation(vehiculeDTOPost.getImmatriculation());
 		}
 
@@ -131,6 +131,7 @@ public class VehiculesSocieteService {
 		if (vehiculeDTOPost.getUrlPhoto() != null) {
 			vehiculeEdit.setUrlPhoto(vehiculeDTOPost.getUrlPhoto());
 		}
+		
 		this.vehiculesSocieteRepo.save(vehiculeEdit);
 	}
 
