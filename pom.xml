@@ -6,7 +6,6 @@
 	<groupId>dev</groupId>
 	<artifactId>gestion-des-transports-groupe1-back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 
 	<name>gestion-des-transports-groupe1-back</name>
 	<description>Demo project for Spring Boot</description>
