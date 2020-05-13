@@ -114,6 +114,26 @@
 			</dependencies>
 		</profile>
 		<profile>
+			<id>heroku</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<jdbc.driver>org.postgresql.Driver</jdbc.driver>
+				<jdbc.url>jdbc:postgres://ec2-54-247-79-178.eu-west-1.compute.amazonaws.com:5432/d3sb063ukud2bi</jdbc.url>
+				<jdbc.user>rgpmsfgotmcnbo</jdbc.user>
+				<jdbc.pass>ee3c971ce9b45d4a96b4a146c47276164fd58ac901a646780a0fa5eae0a866c2</jdbc.pass>
+				<jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
 			<id>dev-mysql</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
@@ -156,26 +176,7 @@
 				</dependency>
 			</dependencies>
 		</profile>
-		<profile>
-			<id>heroku</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<jdbc.driver>org.postgresql.Driver</jdbc.driver>
-				<jdbc.url>jdbc:postgres://ec2-54-247-79-178.eu-west-1.compute.amazonaws.com:5432/d3sb063ukud2bi</jdbc.url>
-				<jdbc.user>rgpmsfgotmcnbo</jdbc.user>
-				<jdbc.pass>ee3c971ce9b45d4a96b4a146c47276164fd58ac901a646780a0fa5eae0a866c2</jdbc.pass>
-				<jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
-			</properties>
-			<dependencies>
-				<dependency>
-					<groupId>org.postgresql</groupId>
-					<artifactId>postgresql</artifactId>
-					<scope>runtime</scope>
-				</dependency>
-			</dependencies>
-		</profile>
+		
 
 	</profiles>
 
