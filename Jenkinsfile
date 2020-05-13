@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        PROD_GIT = "git+ssh://git@push-par-clevercloud-customers.services.clever-cloud.com/app_24f6f6e2-ba85-43d5-8166-24bc7eabcb95.git"
-        GIT_CREDENTIAL_ID = '498f56ad-08cc-4ce4-a8dc-d21027509ca5'
+        PROD_GIT = "git+ssh://git@push-par-clevercloud-customers.services.clever-cloud.com/app_777f93d3-b71d-4a54-abe7-ee008e60eb7b"
+        GIT_CREDENTIAL_ID = 'c5ff76fbde2d5ff915673d52a2edae473536a0c8'
     }
     stages {
         stage('build') {
