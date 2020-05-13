@@ -149,7 +149,7 @@
 				<jpa.hibernate.ddl>${env.HIBERNATE_DDL}</jpa.hibernate.ddl>
 				
 				<jdbc.connections.max.active>2</jdbc.connections.max.active>
-				<app.version>${env.COMMIT_ID}</app.version>
+				
 			</properties>
 			<dependencies>
 				<dependency>
