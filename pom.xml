@@ -138,20 +138,23 @@
 		</profile>
 		<profile>
 			<id>prod</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
-				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-				<jdbc.url>jdbc:mysql://${env.MYSQL_ADDON_HOST}:${env.MYSQL_ADDON_PORT}/${env.MYSQL_ADDON_DB}</jdbc.url>
-				<jdbc.user>${env.MYSQL_ADDON_USER}</jdbc.user>
-				<jdbc.pass>${env.MYSQL_ADDON_PASSWORD}</jdbc.pass>
+				<jdbc.driver>org.postgresql.Driver</jdbc.driver>
+				
+				
+				
 				<jpa.hibernate.ddl>${env.HIBERNATE_DDL}</jpa.hibernate.ddl>
-				<jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>
+				
 				<jdbc.connections.max.active>2</jdbc.connections.max.active>
 				<app.version>${env.COMMIT_ID}</app.version>
 			</properties>
 			<dependencies>
 				<dependency>
-					<groupId>mysql</groupId>
-					<artifactId>mysql-connector-java</artifactId>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
 					<scope>runtime</scope>
 				</dependency>
 			</dependencies>
