@@ -146,9 +146,7 @@
 				
 				
 				
-				<jpa.hibernate.ddl>${env.HIBERNATE_DDL}</jpa.hibernate.ddl>
 				
-				<jdbc.connections.max.active>2</jdbc.connections.max.active>
 				
 			</properties>
 			<dependencies>
