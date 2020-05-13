@@ -145,6 +145,7 @@
                 <jdbc.pass>${env.MYSQL_ADDON_PASSWORD}</jdbc.pass>
                 <jpa.hibernate.ddl>${env.HIBERNATE_DDL}</jpa.hibernate.ddl>
                 <jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>
+                
                 <jdbc.connections.max.active>2</jdbc.connections.max.active>
                 <app.version>${env.COMMIT_ID}</app.version>
             </properties>
